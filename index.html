@@ -105,6 +105,16 @@
   .row.tot{border-top:1px solid rgba(255,255,255,.14);margin-top:4px;padding-top:9px}
   .row.tot .r-item{font-weight:600}
 
+  /* ---- food summary ---- */
+  .summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .sumcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .sumcard .sc-head{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:9px;
+    color:var(--accent-2)}
+  .sumcard .sc-n{font-size:11px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.07);
+    border:1px solid var(--line);border-radius:999px;padding:1px 8px;line-height:1.6}
+  .sumcard ul{margin:0;padding-left:16px}
+  .sumcard li{font-size:13px;color:var(--txt);line-height:1.9}
+
   /* ---- decor cards ---- */
   .decor{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
   .card{
@@ -271,9 +281,17 @@ function panelFood(){
       ${p.note?`<div class="note">待办：${esc(p.note)}</div>`:''}
     </div>`;
   }).join('');
+  const sumCards = (D.foodSummary||[]).map(g=>`
+    <div class="sumcard">
+      <div class="sc-head">${esc(g.cat)}<span class="sc-n">${g.items.length}</span></div>
+      <ul>${g.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>
+    </div>`).join('');
   return `<section class="panel on" data-p="food">
     <h2 class="sec">食物接龙 · ${D.food.length} 人</h2>
-    <div class="people">${cards}</div></section>`;
+    <div class="people">${cards}</div>
+    <h2 class="sec">菜品归类汇总</h2>
+    <div class="summary">${sumCards}</div>
+  </section>`;
 }
 function panelDecor(){
   const cards = D.decor.map((d,i)=>`
