@@ -147,6 +147,8 @@
   .sponsor{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
   .sponsor .s-nm{font-weight:600;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;gap:8px}
   .sponsor .s-note{font-size:12.5px;color:var(--muted);margin-top:8px}
+  .sponsor.off{opacity:.6}
+  .sponsor.off .s-nm{text-decoration:line-through;text-decoration-color:var(--muted)}
 
   /* ---- finance ---- */
   .fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
@@ -228,6 +230,7 @@ $('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
   const foodPeople = D.food.length;
   const confirmedFood = D.food.filter(f=>f.status==='confirmed').length;
   const sponsorsOk = D.sponsors.filter(s=>s.status==='confirmed').length;
+  const sponsorsRej = D.sponsors.filter(s=>s.status==='rejected').length;
   const decorCount = D.decor.length + D.decorNoPhoto.length;
   const gaps = D.supplies.filter(s=>s.status==='gap').length + (D.meta.date? 0:0);
   const todoCnt = D.supplies.filter(s=>s.status==='todo').length;
@@ -239,7 +242,7 @@ $('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
   const k = [
     {k:'食物接龙', v: foodPeople, u:'人', d: confirmedFood+' 人已确认 / '+(foodPeople-confirmedFood)+' 人待补'},
     {k:'装饰品', v: decorCount, u:'项', d:'含 '+(D.decor.length)+' 项实拍图'},
-    {k:'赞助商', cls:'gold', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'},
+    {k:'赞助商', cls:'gold', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'+(sponsorsRej?' / '+sponsorsRej+' 家已拒':'')},
     {k:'剩余资金', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 '+f.currency+' '+f.budget+' · 已花 ¥'+spentSum)},
     {k:'待办缺口', v: gaps, u:'项', d:'餐勺 · 成分表'},
     {k:'待采购', v: todoCnt, u:'项', d:'野餐盒 · 透明口罩'}
@@ -315,14 +318,19 @@ function panelDecor(){
   </section>`;
 }
 function panelSponsor(){
+  const stBadge = st => st==='confirmed'?'<span class="badge ok">已确认</span>'
+    : st==='rejected'?'<span class="badge gap">已拒绝</span>'
+    : '<span class="badge pd">待确认</span>';
   const cards = D.sponsors.map(s=>`
-    <div class="sponsor">
+    <div class="sponsor${s.status==='rejected'?' off':''}">
       <div class="s-nm">${esc(s.name)}
-        <span class="badge ${s.status==='confirmed'?'ok':'pd'}">${s.status==='confirmed'?'已确认':'待确认'}</span></div>
+        ${stBadge(s.status)}</div>
       <div class="s-note">${esc(s.note||'')}</div>
     </div>`).join('');
+  const okN = D.sponsors.filter(s=>s.status==='confirmed').length;
+  const rejN = D.sponsors.filter(s=>s.status==='rejected').length;
   return `<section class="panel" data-p="sponsor">
-    <h2 class="sec">赞助商 · ${D.sponsors.length} 家</h2>
+    <h2 class="sec">赞助商 · ${D.sponsors.length} 家（已确认 ${okN} · 已拒绝 ${rejN}）</h2>
     <div class="sponsors">${cards}</div></section>`;
 }
 function panelGear(){

@@ -33,7 +33,7 @@ window.BOARD = {
 
   // ---------- 赞助商 ----------
   sponsors: [
-    { name: "海底捞",     status: "pending", note: "待确认具体赞助内容" },
+    { name: "海底捞",     status: "rejected", note: "已拒绝（2026-10-02 更新）" },
     { name: "农耕记",     status: "pending", note: "待确认" },
     { name: "袁记云饺",   status: "pending", note: "待确认" },
     { name: "蜜雪冰城",   status: "pending", note: "待确认" },
