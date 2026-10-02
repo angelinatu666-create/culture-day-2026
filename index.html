@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文化日 2026 · 中国展台看板</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --surface:#171a21;
+    --surface-2:#1e222b;
+    --ink:#eef1f6;
+    --muted:#8b93a7;
+    --border:#262b36;
+    --accent:#e03a3a;      /* 中国红 */
+    --accent-2:#e8b23a;    /* 金 */
+    --ok:#3fb950;
+    --warn:#e8b23a;
+    --gap:#e0563a;
+    --radius:14px;
+    --shadow:0 8px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 20px 80px}
+
+  /* ---- header ---- */
+  header.top{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;margin-bottom:6px;
+    border-bottom:1px solid var(--border);padding-bottom:18px;
+  }
+  .title h1{margin:0;font-size:26px;letter-spacing:-.3px}
+  .title .sub{color:var(--muted);font-size:13px;margin-top:4px}
+  .title .sub b{color:var(--accent-2);font-weight:600}
+  .stamp{
+    font-size:12px;color:var(--muted);border:1px solid var(--border);
+    padding:6px 12px;border-radius:999px;background:var(--surface);
+    white-space:nowrap;
+  }
+
+  /* ---- KPI row ---- */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 8px}
+  .kpi{
+    background:linear-gradient(180deg,var(--surface-2),var(--surface));
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:16px 18px;position:relative;overflow:hidden;
+  }
+  .kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+  .kpi.gold:before{background:var(--accent-2)}
+  .kpi .k{font-size:12px;color:var(--muted);letter-spacing:.4px}
+  .kpi .v{font-size:27px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums}
+  .kpi .v small{font-size:13px;color:var(--muted);font-weight:500}
+  .kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
+
+  /* ---- tabs ---- */
+  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 18px;position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg,var(--bg) 70%,transparent);padding:10px 0 12px}
+  nav.tabs button{
+    background:var(--surface);color:var(--muted);border:1px solid var(--border);
+    padding:9px 16px;border-radius:999px;font-size:13.5px;cursor:pointer;
+    font-family:inherit;transition:.15s;
+  }
+  nav.tabs button:hover{color:var(--ink);border-color:#39404f}
+  nav.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+
+  section.panel{display:none}
+  section.panel.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  h2.sec{font-size:15px;color:var(--muted);font-weight:600;letter-spacing:.5px;
+    text-transform:uppercase;margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+  h2.sec:after{content:"";flex:1;height:1px;background:var(--border)}
+
+  /* ---- food grid ---- */
+  .people{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+  .person{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:15px 16px;transition:.15s;
+  }
+  .person:hover{border-color:#39404f;transform:translateY(-1px)}
+  .person .who{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:10px}
+  .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+  .dot.ok{background:var(--ok)} .dot.pd{background:var(--warn)}
+  .person ul{margin:0;padding:0;list-style:none}
+  .person li{font-size:13.5px;color:#cfd6e4;padding:3px 0 3px 14px;position:relative}
+  .person li:before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;
+    border-radius:50%;background:var(--accent-2);opacity:.7}
+  .person .note{margin-top:8px;font-size:12px;color:var(--gap)}
+  .person li.dup{color:#fff}
+  .tagdup{display:inline-block;margin-left:7px;font-size:10.5px;line-height:1;padding:2px 6px;
+    border-radius:999px;background:rgba(224,58,58,.22);color:#ff8a8a;border:1px solid rgba(224,58,58,.5);
+    vertical-align:middle;font-weight:600}
+  .tagcur{display:inline-block;font-size:10.5px;line-height:1;padding:2px 7px;border-radius:999px;font-weight:600}
+  .tagcur.cny{background:rgba(255,190,90,.18);color:#ffcf7a;border:1px solid rgba(255,190,90,.45)}
+  .tagcur.sgd{background:rgba(90,190,255,.16);color:#8fd3ff;border:1px solid rgba(90,190,255,.45)}
+  .tbd{color:var(--gap);font-size:12px}
+  .row.tot{border-top:1px solid rgba(255,255,255,.14);margin-top:4px;padding-top:9px}
+  .row.tot .r-item{font-weight:600}
+
+  /* ---- decor cards ---- */
+  .decor{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;cursor:zoom-in;transition:.18s;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-3px);border-color:#414a5c;box-shadow:var(--shadow)}
+  .card .thumb{aspect-ratio:4/3;background:#0b0d11;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .meta{padding:12px 14px 14px}
+  .card .meta .nm{font-size:14.5px;font-weight:600}
+  .card .meta .qt{font-size:13px;color:var(--accent-2);margin-top:3px;font-variant-numeric:tabular-nums}
+  .card .meta .by{font-size:12px;color:var(--muted);margin-top:5px;display:flex;justify-content:space-between;gap:8px}
+  .card .meta .by .zoomlink{color:#5b6478}
+
+  /* ---- simple rows (equipment/supplies/nophoto) ---- */
+  .rows{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .row{display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid var(--border);font-size:14px}
+  .row:last-child{border-bottom:none}
+  .row .r-item{font-weight:600;min-width:110px}
+  .row .r-qty{color:var(--accent-2);font-variant-numeric:tabular-nums;min-width:120px}
+  .row .r-by{color:var(--muted);font-size:13px;flex:1}
+  .badge{font-size:11.5px;padding:2px 9px;border-radius:999px;font-weight:600;white-space:nowrap}
+  .badge.ok{background:rgba(63,185,80,.15);color:var(--ok)}
+  .badge.pd{background:rgba(232,178,58,.15);color:var(--warn)}
+  .badge.gap{background:rgba(224,86,58,.15);color:var(--gap)}
+
+  /* ---- sponsors ---- */
+  .sponsors{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .sponsor{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+  .sponsor .s-nm{font-weight:600;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .sponsor .s-note{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+  /* ---- finance ---- */
+  .fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
+  .fin{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+  .fin .k{font-size:12.5px;color:var(--muted)}
+  .fin .v{font-size:30px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums}
+  .fin.big .v{font-size:36px;color:var(--accent-2)}
+  .bar{height:10px;border-radius:999px;background:#23283350;overflow:hidden;margin-top:14px;border:1px solid var(--border)}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .empty{color:var(--muted);font-size:13.5px;border:1px dashed var(--border);border-radius:var(--radius);
+    padding:22px;text-align:center;background:rgba(255,255,255,.01)}
+
+  /* ---- lightbox ---- */
+  #lb{position:fixed;inset:0;background:rgba(6,8,11,.92);backdrop-filter:blur(6px);
+    display:none;align-items:center;justify-content:center;z-index:100;padding:30px}
+  #lb.on{display:flex;animation:fade .2s}
+  #lb .box{max-width:min(880px,92vw);max-height:88vh;display:flex;flex-direction:column;
+    background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  #lb img{max-width:100%;max-height:66vh;object-fit:contain;background:#0b0d11;display:block}
+  #lb .cap{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  #lb .cap .nm{font-size:17px;font-weight:600}
+  #lb .cap .qt{font-size:14px;color:var(--accent-2)}
+  #lb .cap .by{font-size:13px;color:var(--muted)}
+  #lb .cap .nt{font-size:13px;color:#c2cadb;width:100%;margin-top:4px}
+  #lb .x{position:absolute;top:22px;right:26px;font-size:30px;color:#fff;cursor:pointer;line-height:1;opacity:.7}
+  #lb .x:hover{opacity:1}
+
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--border);
+    color:#5b6478;font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  code{background:var(--surface-2);padding:1px 6px;border-radius:5px;font-size:12px;color:#a9b3c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="title">
+      <h1 id="m-title">文化日 2026 · 中国展台</h1>
+      <div class="sub" id="m-sub"></div>
+    </div>
+    <div class="stamp">最后更新 · <span id="stamp"></span></div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <nav class="tabs" id="tabs"></nav>
+  <main id="panels"></main>
+
+  <footer>
+    <span>单文件看板 · 数据在 <code>data.js</code>，改完刷新即可</span>
+    <span>点击装饰卡片可放大查看 / 细节</span>
+  </footer>
+</div>
+
+<div id="lb"><span class="x" onclick="closeLb()">&times;</span>
+  <div class="box">
+    <img id="lb-img" alt="">
+    <div class="cap">
+      <span class="nm" id="lb-nm"></span>
+      <span class="qt" id="lb-qt"></span>
+      <span class="by" id="lb-by"></span>
+      <span class="nt" id="lb-nt"></span>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+const D = window.BOARD;
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// header
+$('#m-title').textContent = D.meta.title;
+$('#m-sub').innerHTML = D.meta.subtitle + ' · <b>' + esc(D.meta.date) + '</b> · 负责人：' + esc(D.meta.owner);
+$('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
+
+// ---- KPIs ----
+(function(){
+  const foodPeople = D.food.length;
+  const confirmedFood = D.food.filter(f=>f.status==='confirmed').length;
+  const sponsorsOk = D.sponsors.filter(s=>s.status==='confirmed').length;
+  const decorCount = D.decor.length + D.decorNoPhoto.length;
+  const gaps = D.supplies.filter(s=>s.status==='gap').length + (D.meta.date? 0:0);
+  const todoCnt = D.supplies.filter(s=>s.status==='todo').length;
+  const f = D.finance;
+  const line = x => (x.unit==null) ? null : x.unit*x.qty;
+  const spentSum = (f.spent||[]).reduce((a,b)=>a+(line(b)||0),0);
+  const remain = (f.budget!=null) ? f.budget : null;
+
+  const k = [
+    {k:'食物接龙', v: foodPeople, u:'人', d: confirmedFood+' 人已确认 / '+(foodPeople-confirmedFood)+' 人待补'},
+    {k:'装饰品', v: decorCount, u:'项', d:'含 '+(D.decor.length)+' 项实拍图'},
+    {k:'赞助商', cls:'gold', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'},
+    {k:'剩余资金', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 '+f.currency+' '+f.budget+' · 已花 ¥'+spentSum)},
+    {k:'待办缺口', v: gaps, u:'项', d:'餐勺 · 成分表'},
+    {k:'待采购', v: todoCnt, u:'项', d:'野餐盒 · 透明口罩'}
+  ];
+  $('#kpis').innerHTML = k.map(x=>`
+    <div class="kpi ${x.cls||''}">
+      <div class="k">${esc(x.k)}</div>
+      <div class="v">${esc(x.v)}<small> ${esc(x.u)}</small></div>
+      <div class="d">${esc(x.d)}</div>
+    </div>`).join('');
+})();
+
+// ---- Tabs ----
+const TABS = [
+  {id:'food',   label:'食物接龙'},
+  {id:'decor',  label:'装饰品'},
+  {id:'sponsor',label:'赞助商'},
+  {id:'gear',   label:'现场设备与耗材'},
+  {id:'money',  label:'财务'}
+];
+$('#tabs').innerHTML = TABS.map((t,i)=>`<button data-t="${t.id}" class="${i===0?'on':''}">${t.label}</button>`).join('');
+$('#tabs').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on', x===b));
+  document.querySelectorAll('section.panel').forEach(p=>p.classList.toggle('on', p.dataset.p===b.dataset.t));
+});
+
+// ---- Panels ----
+function panelFood(){
+  const cards = D.food.map(p=>{
+    const ok = p.status==='confirmed';
+    return `<div class="person">
+      <div class="who"><span class="dot ${ok?'ok':'pd'}"></span>${esc(p.name)}
+        <span class="badge ${ok?'ok':'pd'}" style="margin-left:auto">${ok?'已确认':'待补充'}</span></div>
+      <ul>${p.items.map(i=>{
+        const dup = (p.dups||[]).includes(i);
+        return `<li${dup?' class="dup"':''}>${esc(i)}${dup?'<span class="tagdup">重复</span>':''}</li>`;
+      }).join('')}</ul>
+      ${p.note?`<div class="note">待办：${esc(p.note)}</div>`:''}
+    </div>`;
+  }).join('');
+  return `<section class="panel on" data-p="food">
+    <h2 class="sec">食物接龙 · ${D.food.length} 人</h2>
+    <div class="people">${cards}</div></section>`;
+}
+function panelDecor(){
+  const cards = D.decor.map((d,i)=>`
+    <div class="card" onclick="openLb(${i})">
+      <div class="thumb"><img loading="lazy" src="${esc(d.photo)}" alt="${esc(d.item)}"></div>
+      <div class="meta">
+        <div class="nm">${esc(d.item)}</div>
+        <div class="qt">${esc(d.qty)}</div>
+        <div class="by"><span>提供：${esc(d.by||'—')}</span><span class="zoomlink">放大 ⤢</span></div>
+      </div>
+    </div>`).join('');
+  const rows = D.decorNoPhoto.map(d=>`
+    <div class="row"><span class="r-item">${esc(d.item)}</span>
+      <span class="r-qty">${esc(d.qty)}</span>
+      <span class="r-by">${esc(d.by||'')}</span></div>`).join('');
+  return `<section class="panel" data-p="decor">
+    <h2 class="sec">装饰品 · 实拍 ${D.decor.length} 项（点击放大）</h2>
+    <div class="decor">${cards}</div>
+    <h2 class="sec">装饰品 · 无图清单</h2>
+    <div class="rows">${rows}</div>
+  </section>`;
+}
+function panelSponsor(){
+  const cards = D.sponsors.map(s=>`
+    <div class="sponsor">
+      <div class="s-nm">${esc(s.name)}
+        <span class="badge ${s.status==='confirmed'?'ok':'pd'}">${s.status==='confirmed'?'已确认':'待确认'}</span></div>
+      <div class="s-note">${esc(s.note||'')}</div>
+    </div>`).join('');
+  return `<section class="panel" data-p="sponsor">
+    <h2 class="sec">赞助商 · ${D.sponsors.length} 家</h2>
+    <div class="sponsors">${cards}</div></section>`;
+}
+function panelGear(){
+  const badge = st => st==='confirmed'?'<span class="badge ok">已备</span>'
+    : st==='gap'?'<span class="badge gap">缺口</span>'
+    : st==='todo'?'<span class="badge pd">待采购</span>':'<span class="badge pd">待定</span>';
+  const eq = D.equipment.map(e=>`
+    <div class="row"><span class="r-item">${esc(e.item)}</span>
+      <span class="r-qty">${esc(e.qty)}</span>
+      <span class="r-by">提供：${esc(e.by||'—')}</span></div>`).join('');
+  const byStatus = list => list.sort((a,b)=>{
+    const rank = s => s.status==='confirmed'?0 : s.status==='todo'?1 : 2;
+    return rank(a)-rank(b);
+  });
+  const sp = byStatus(D.supplies.slice()).map(s=>`
+    <div class="row"><span class="r-item">${esc(s.item)}</span>
+      <span class="r-qty">${esc(s.qty)}</span>
+      <span class="r-by">${s.by?'提供：'+esc(s.by):(s.note?esc(s.note):'')}</span>
+      ${badge(s.status)}</div>`).join('');
+  return `<section class="panel" data-p="gear">
+    <h2 class="sec">现场设备</h2><div class="rows">${eq}</div>
+    <h2 class="sec">现场物资与耗材</h2><div class="rows">${sp}</div>
+  </section>`;
+}
+function panelMoney(){
+  const f = D.finance;
+  const line = x => (x.unit==null) ? null : x.unit*x.qty;
+  const spentSum = (f.spent||[]).reduce((a,b)=>a+(line(b)||0),0);
+  const budget = f.budget;
+  const remain = budget!=null? budget : null;
+  const pct = budget? Math.min(100, Math.round(spentSum/budget*100)) : 0;
+  const curTag = c => c==='SGD' ? '<span class="tagcur sgd">SGD</span>' : '<span class="tagcur cny">¥</span>';
+  const def = (f.spent||[]).map(x=>{
+    const amt = line(x);
+    const price = (x.unit==null) ? '<span class="tbd">单价待补</span>' : (x.unit+' × '+x.qty+' = <b>'+amt+'</b>');
+    return `<div class="row"><span class="r-item">${esc(x.item)}</span>
+        <span class="r-qty">${price}</span>
+        <span class="r-by">${curTag(x.cur||'CNY')}</span></div>`;
+  }).join('');
+  const defTotal = `<div class="row tot"><span class="r-item">合计（人民币）</span>
+      <span class="r-qty"><b>¥${spentSum}</b></span>
+      <span class="r-by">${(f.spent||[]).filter(x=>x.unit==null).length? '含 '+((f.spent||[]).filter(x=>x.unit==null).length)+' 项待补价':''}</span></div>`;
+  const todoRows = '';
+  const readyRows = '';
+  return `<section class="panel" data-p="money">
+    <h2 class="sec">财务总览</h2>
+    <div class="fin-grid">
+      <div class="fin"><div class="k">募集总收入</div><div class="v">${budget==null?'—':'SGD '+budget}</div></div>
+      <div class="fin"><div class="k">已花支出（人民币）</div><div class="v">¥${spentSum}</div>
+        <div class="bar"><i style="width:${pct}%"></i></div></div>
+      <div class="fin big"><div class="k">募集余额（SGD）</div><div class="v">${remain==null?'—':'SGD '+remain}</div>
+        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">募集款未动用 · 上述支出由人民币另行支付</div></div>
+    </div>
+    <h2 class="sec">捐赠人（SGD）</h2>
+    <div class="rows">${(f.donors&&f.donors.length)?f.donors.map(d=>`<div class="row"><span class="r-item">${esc(d.name)}</span><span class="r-qty">SGD ${esc(d.amount)}</span><span class="r-by">捐赠</span></div>`).join(''):'<div class="empty">暂无捐赠记录</div>'}</div>
+    <h2 class="sec">支出明细（人民币）</h2>
+    <div class="rows">${(f.spent&&f.spent.length)?(def+defTotal):'<div class="empty">暂无支出记录</div>'}</div>
+  </section>`;
+}
+
+$('#panels').innerHTML = panelFood()+panelDecor()+panelSponsor()+panelGear()+panelMoney();
+
+// ---- lightbox ----
+function openLb(i){
+  const d = D.decor[i];
+  $('#lb-img').src = d.photo;
+  $('#lb-nm').textContent = d.item;
+  $('#lb-qt').textContent = d.qty;
+  $('#lb-by').textContent = '提供：' + (d.by||'—');
+  $('#lb-nt').textContent = d.note || '';
+  $('#lb').classList.add('on');
+}
+function closeLb(){ $('#lb').classList.remove('on'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLb(); });
+$('#lb').addEventListener('click', e=>{ if(e.target.id==='lb') closeLb(); });
+</script>
+</body>
+</html>
