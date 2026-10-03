@@ -44,7 +44,7 @@ window.BOARD = {
 
   // ---------- 食物接龙（11人） ----------
   food: [
-    { name: "Angelina",      items: ["北京烤鸭 20人份", "海南鸡 20人份", "传统冰粉 20人份"], status: "confirmed" },
+    { name: "Angelina",      items: ["番茄炒蛋 20人份", "海南鸡 20人份", "传统冰粉 20人份"], status: "confirmed" },
     { name: "Hilary",        items: ["蛋炒饭 10人份", "肉末豆角 10人份", "酸梅汤 30人份"], status: "confirmed" },
     { name: "小周周 Lily",   items: ["棉花糖机（现场制作）", "干锅鸡翅"], status: "confirmed" },
     { name: "晓芳",          items: ["煎饺 100个", "橘子 60个", "陕西凉皮 10份"], status: "confirmed" },
@@ -60,7 +60,6 @@ window.BOARD = {
   // ---------- 菜品归类汇总 ----------
   foodSummary: [
     { cat: "肉蛋类", items: [
-      "北京烤鸭 20人份（Angelina）",
       "海南鸡 20人份（Angelina）",
       "干锅鸡翅（小周周 Lily）",
       "酱牛肉 20人份（思文）",
@@ -68,6 +67,7 @@ window.BOARD = {
       "卤鹌鹑蛋（Vivi）"
     ]},
     { cat: "蔬菜", items: [
+      "番茄炒蛋 20人份（Angelina）",
       "肉末豆角 10人份（Hilary）",
       "橘子 60个（晓芳）"
     ]},
