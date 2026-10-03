@@ -245,7 +245,7 @@ $('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
     {k:'赞助商', cls:'gold', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'+(sponsorsRej?' / '+sponsorsRej+' 家已拒':'')},
     {k:'剩余资金', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 '+f.currency+' '+f.budget+' · 已花 ¥'+spentSum)},
     {k:'待办缺口', v: gaps, u:'项', d:'餐勺 · 成分表'},
-    {k:'待采购', v: todoCnt, u:'项', d:'野餐盒 · 透明口罩'}
+    {k:'待采购', v: todoCnt, u:'项', d:'野餐盒 · 雪糕棍'}
   ];
   $('#kpis').innerHTML = k.map(x=>`
     <div class="kpi ${x.cls||''}">

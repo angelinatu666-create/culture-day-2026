@@ -33,25 +33,25 @@ window.BOARD = {
 
   // ---------- 赞助商 ----------
   sponsors: [
-    { name: "海底捞",     status: "rejected", note: "已拒绝（2026-10-02 更新）" },
-    { name: "农耕记",     status: "pending", note: "待确认" },
-    { name: "袁记云饺",   status: "pending", note: "待确认" },
-    { name: "蜜雪冰城",   status: "pending", note: "待确认" },
-    { name: "太二酸菜鱼", status: "pending", note: "待确认" },
-    { name: "扑面而来",   status: "pending", note: "待确认" },
-    { name: "思家客",     status: "pending", note: "待确认" }
+    { name: "海底捞",     status: "rejected", note: "已拒绝😔" },
+    { name: "农耕记",     status: "rejected", note: "已拒绝😔" },
+    { name: "袁记云饺",   status: "rejected", note: "已拒绝😔" },
+    { name: "蜜雪冰城",   status: "rejected", note: "已拒绝😔" },
+    { name: "太二酸菜鱼", status: "rejected", note: "已拒绝😔" },
+    { name: "扑面而来",   status: "rejected", note: "已拒绝😔" },
+    { name: "思家客",     status: "rejected", note: "已拒绝😔" }
   ],
 
   // ---------- 食物接龙（11人） ----------
   food: [
-    { name: "Angelina",      items: ["酸菜鱼片 20人份", "白斩鸡 20人份", "传统冰粉 20人份"], status: "confirmed" },
-    { name: "Hilary",        items: ["蛋炒饭 10人份", "酸梅粉 30人份（大饮料冰桶）"], status: "confirmed" },
-    { name: "小周周 Lily",   items: ["棉花糖机（现场制作）", "干锅鸡翅"], status: "confirmed", dups: ["干锅鸡翅"] },
-    { name: "晓芳",          items: ["鸡翅", "饺子", "水果"], status: "pending", note: "份量待补充", dups: ["鸡翅", "饺子"] },
-    { name: "思文",          items: ["包子 40个", "酱牛肉 20人份", "干炒牛河 10人份"], status: "confirmed", dups: ["酱牛肉 20人份"] },
-    { name: "许可",          items: ["韭菜猪肉饺子"], status: "pending", note: "份量待补充", dups: ["韭菜猪肉饺子"] },
-    { name: "家桓",          items: ["饮料"], status: "pending", note: "种类/数量待补充" },
-    { name: "Vivi",          items: ["卤牛肉", "卤鹌鹑蛋和土豆"], status: "pending", note: "份量待补充", dups: ["卤牛肉"] },
+    { name: "Angelina",      items: ["北京烤鸭 20人份", "海南鸡 20人份", "传统冰粉 20人份"], status: "confirmed" },
+    { name: "Hilary",        items: ["蛋炒饭 10人份", "肉末豆角 10人份", "酸梅汤 30人份"], status: "confirmed" },
+    { name: "小周周 Lily",   items: ["棉花糖机（现场制作）", "干锅鸡翅"], status: "confirmed" },
+    { name: "晓芳",          items: ["煎饺 100个", "橘子 60个", "陕西凉皮 10份"], status: "confirmed" },
+    { name: "思文",          items: ["包子 40个", "酱牛肉 20人份", "干炒牛河 10人份"], status: "confirmed" },
+    { name: "许可",          items: ["韭菜猪肉饺子"], status: "pending", note: "份量待补充" },
+    { name: "家桓",          items: ["饮料或零食"], status: "pending", note: "种类/数量待补充" },
+    { name: "Vivi",          items: ["卤牛肉", "卤鹌鹑蛋和土豆"], status: "pending", note: "份量待补充" },
     { name: "Susan",         items: ["冰皮月饼 50粒"], status: "confirmed" },
     { name: "李静",          items: ["生煎包 50", "地瓜丸 50"], status: "confirmed" },
     { name: "LSY",           items: ["中式糕点 若干（鲍师傅 / 熊猫馋了 采购）"], status: "pending", note: "数量待定" }
@@ -60,24 +60,25 @@ window.BOARD = {
   // ---------- 菜品归类汇总 ----------
   foodSummary: [
     { cat: "肉蛋类", items: [
-      "酸菜鱼片 20人份（Angelina）",
-      "白斩鸡 20人份（Angelina）",
+      "北京烤鸭 20人份（Angelina）",
+      "海南鸡 20人份（Angelina）",
       "干锅鸡翅（小周周 Lily）",
-      "鸡翅（晓芳）",
       "酱牛肉 20人份（思文）",
       "卤牛肉（Vivi）",
       "卤鹌鹑蛋（Vivi）"
     ]},
     { cat: "蔬菜", items: [
-      "水果（晓芳）"
+      "肉末豆角 10人份（Hilary）",
+      "橘子 60个（晓芳）"
     ]},
     { cat: "主食", items: [
       "蛋炒饭 10人份（Hilary）",
       "包子 40个（思文）",
       "干炒牛河 10人份（思文）",
       "生煎包 50（李静）",
+      "陕西凉皮 10份（晓芳）",
+      "煎饺 100个（晓芳）",
       "韭菜猪肉饺子（许可）",
-      "饺子（晓芳）",
       "卤土豆（Vivi）"
     ]},
     { cat: "点心", items: [
@@ -87,9 +88,9 @@ window.BOARD = {
     ]},
     { cat: "甜点饮料", items: [
       "传统冰粉 20人份（Angelina）",
-      "酸梅粉 30人份 · 大饮料冰桶（Hilary）",
+      "酸梅汤 30人份（Hilary）",
       "棉花糖机 · 现场制作（小周周 Lily）",
-      "饮料 种类/数量待补（家桓）"
+      "饮料或零食（家桓，种类/数量待补）"
     ]}
   ],
 
@@ -126,7 +127,7 @@ window.BOARD = {
     { item: "竹签",       qty: "3把",      by: "涂", status: "confirmed" },
     { item: "现场纸杯",   qty: "约40个中杯 + 杯盖", by: "涂", status: "confirmed", note: "已买好" },
     { item: "野餐盒",     qty: "20个（45×31cm 大尺寸）", by: "", status: "todo", note: "菜品统计约需 15 个" },
-    { item: "透明口罩",   qty: "约15个",   by: "", status: "todo" },
+    { item: "雪糕棍",     qty: "待定",     by: "",   status: "todo", note: "待采购" },
     { item: "餐勺",       qty: "待定",     by: "",   status: "gap" },
     { item: "成分表",     qty: "待制作",   by: "", status: "gap", note: "过敏原/成分标示，务必补" }
   ]
