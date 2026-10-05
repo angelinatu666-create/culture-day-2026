@@ -54,13 +54,15 @@ window.BOARD = {
     { name: "Vivi",          items: ["卤牛肉", "卤鹌鹑蛋和土豆"], status: "pending", note: "份量待补充" },
     { name: "Susan",         items: ["冰皮月饼 50粒"], status: "confirmed" },
     { name: "李静",          items: ["生煎包 50", "地瓜丸 50"], status: "confirmed" },
-    { name: "LSY",           items: ["中式糕点 若干（鲍师傅 / 熊猫馋了 采购）"], status: "pending", note: "数量待定" }
+    { name: "LSY",           items: ["中式糕点 若干（鲍师傅 / 熊猫馋了 采购）"], status: "pending", note: "数量待定" },
+    { name: "Alicia",        items: ["叉烧肉"], status: "confirmed", note: "份量待补充" }
   ],
 
   // ---------- 菜品归类汇总 ----------
   foodSummary: [
     { cat: "肉蛋类", items: [
       "海南鸡 20人份（Angelina）",
+      "叉烧肉（Alicia，份量待补）",
       "干锅鸡翅（小周周 Lily）",
       "酱牛肉 20人份（思文）",
       "卤牛肉（Vivi）",
