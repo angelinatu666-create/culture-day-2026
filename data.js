@@ -42,7 +42,7 @@ window.BOARD = {
     { name: "思家客",     status: "rejected", note: "已拒绝😔" }
   ],
 
-  // ---------- 食物接龙（11人） ----------
+  // ---------- 食物接龙 ----------
   food: [
     { name: "Angelina",      items: ["番茄炒蛋 20人份", "海南鸡 20人份", "奶茶 20人份"], status: "confirmed" },
     { name: "Hilary",        items: ["蛋炒饭 10人份", "肉末豆角 10人份", "酸梅汤 30人份"], status: "confirmed" },
@@ -55,7 +55,8 @@ window.BOARD = {
     { name: "Susan",         items: ["冰皮月饼 50粒"], status: "confirmed" },
     { name: "李静",          items: ["生煎包 50", "地瓜丸 50"], status: "confirmed" },
     { name: "LSY",           items: ["中式糕点 若干（鲍师傅 / 熊猫馋了 采购）"], status: "pending", note: "数量待定" },
-    { name: "Alicia",        items: ["叉烧肉 约20人份"], status: "confirmed" }
+    { name: "Alicia",        items: ["叉烧肉 约20人份"], status: "confirmed" },
+    { name: "MBC",           items: ["烧卖 45个"], status: "confirmed" }
   ],
 
   // ---------- 菜品归类汇总 ----------
@@ -79,6 +80,7 @@ window.BOARD = {
       "卤土豆（Vivi，大碗装）",
       "包子 40个（思文，野餐盒装）",
       "生煎包 50（李静，野餐盒装）",
+      "烧卖 45个（MBC，野餐盒装）",
       "煎饺 100个（晓芳，大圆盘装）",
       "韭菜猪肉饺子 100个（许可，大圆盘装）"
     ]},
