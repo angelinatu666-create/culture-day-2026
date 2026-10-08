@@ -54,9 +54,10 @@ window.BOARD = {
     { name: "Vivi",          items: ["卤牛肉", "卤鹌鹑蛋和土豆"], status: "pending", note: "份量待补充" },
     { name: "Susan",         items: ["冰皮月饼 50粒"], status: "confirmed" },
     { name: "李静",          items: ["生煎包 50", "地瓜丸 50"], status: "confirmed" },
-    { name: "LSY",           items: ["中式糕点 若干（鲍师傅 / 熊猫馋了 采购）"], status: "pending", note: "数量待定" },
+    { name: "LSY",           items: ["中式糕点 若干（鲍师傅 / 熊猫馋了 采购）"], status: "pending" },
     { name: "Alicia",        items: ["叉烧肉 约20人份"], status: "confirmed" },
-    { name: "MBC",           items: ["烧卖 45个", "蒜香鸡翅"], status: "confirmed" }
+    { name: "MBC",           items: ["烧卖 45个", "蒜香鸡翅"], status: "confirmed" },
+    { name: "子涵",          items: ["牛奶 2箱"], status: "confirmed" }
   ],
 
   // ---------- 菜品归类汇总 ----------
@@ -87,14 +88,15 @@ window.BOARD = {
     ]},
     { cat: "点心水果", items: [
       "冰皮月饼 50粒（Susan，托盘装）",
-      "地瓜丸 50（李静，容器待定）",
-      "中式糕点 若干（LSY，容器待定）",
-      "橘子 60个（晓芳，大白框或待定）"
+      "地瓜丸 50（李静）",
+      "中式糕点 若干（LSY）",
+      "橘子 60个（晓芳）"
     ]},
     { cat: "零食饮料", items: [
       "奶茶 20人份（Angelina）",
       "酸梅汤 30人份（Hilary）",
       "棉花糖机 · 现场制作（小周周 Lily）",
+      "牛奶 2箱（子涵）",
       "饮料或零食（家桓，种类/数量待补）"
     ]}
   ],
@@ -107,8 +109,8 @@ window.BOARD = {
     { photo: "assets/d03.jpg", item: "小舞龙",       qty: "2个",              by: "文" },
     { photo: "assets/d04.jpg", item: "红色格子桌布", qty: "1张 140×140cm",    by: "文" },
     { photo: "assets/d05.jpg", item: "围裙",         qty: "6条",              by: "沈" },
-    { photo: "assets/d07.jpg", item: "易拉宝①",      qty: "1个（待定）",      by: "沈", note: "中英双语「中国：丰厚遗产与光明未来」主题海报" },
-    { photo: "assets/d08.jpg", item: "易拉宝②",      qty: "1个（待定）",      by: "沈", note: "同上主题，第二版" },
+    { photo: "assets/d07.jpg", item: "易拉宝①",      qty: "1个",      by: "沈", note: "中英双语「中国：丰厚遗产与光明未来」主题海报" },
+    { photo: "assets/d08.jpg", item: "易拉宝②",      qty: "1个",      by: "沈", note: "同上主题，第二版" },
     { photo: "assets/d09.jpg", item: "红色长桌布",   qty: "4张 140×180cm",    by: "沈" },
     { photo: "assets/d10.jpg", item: "熊猫庆华夏背景布", qty: "1套",          by: "沈", note: "5条幅35×175cm + 红/金气球 + 皱纹纸（现场主视觉背景）" },
     { photo: "assets/d11.jpg", item: "香槟色桌布",   qty: "4张 140×180cm",    by: "沈" }
@@ -123,7 +125,7 @@ window.BOARD = {
   gearGroups: [
     { g: "布置类", items: [
       { item: "小旗龙",   qty: "",       by: "思文" },
-      { item: "国旗",     qty: "2面",    by: "小舟舟" },
+      { item: "国旗",     qty: "2面",    by: "小周周 Lily" },
       { item: "桌布（红+白）", qty: "",  by: "晓芳" },
       { item: "透明胶",   qty: "",       by: "涂" },
       { item: "小剪刀",   qty: "",       by: "涂" },
