@@ -240,7 +240,7 @@
   </div>
 </div>
 
-<script src="data.js?v=20261006d"></script>
+<script src="data.js?v=20261006e"></script>
 <script>
 const D = window.BOARD;
 const $ = s => document.querySelector(s);
@@ -258,8 +258,7 @@ $('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
   const sponsorsOk = D.sponsors.filter(s=>s.status==='confirmed').length;
   const sponsorsRej = D.sponsors.filter(s=>s.status==='rejected').length;
   const decorCount = D.decor.length + D.decorNoPhoto.length;
-  const gaps = D.supplies.filter(s=>s.status==='gap').length + (D.meta.date? 0:0);
-  const todoCnt = D.supplies.filter(s=>s.status==='todo').length;
+  const gearCount = (D.gearGroups||[]).reduce((a,g)=>a+g.items.length,0);
   const f = D.finance;
   const line = x => (x.unit==null) ? null : x.unit*x.qty;
   const spentSum = (f.spent||[]).reduce((a,b)=>a+(line(b)||0),0);
@@ -268,10 +267,9 @@ $('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
   const k = [
     {k:'食物接龙', v: foodPeople, u:'人', d: confirmedFood+' 人已确认 / '+(foodPeople-confirmedFood)+' 人待补'},
     {k:'装饰品', v: decorCount, u:'项', d:'含 '+(D.decor.length)+' 项实拍图'},
-    {k:'赞助商', cls:'gold', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'+(sponsorsRej?' / '+sponsorsRej+' 家已拒':'')},
+    {k:'现场设备与耗材', cls:'gold', v: gearCount, u:'项', d:(D.gearGroups||[]).length+' 组（布置/棉花糖/餐桌）'},
     {k:'剩余资金', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 '+f.currency+' '+f.budget+' · 已花 ¥'+spentSum)},
-    {k:'待办缺口', v: gaps, u:'项', d:'餐勺 · 成分表'},
-    {k:'待采购', v: todoCnt, u:'项', d:'野餐盒 · 雪糕棍'}
+    {k:'赞助商', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'+(sponsorsRej?' / '+sponsorsRej+' 家已拒':'')}
   ];
   $('#kpis').innerHTML = k.map(x=>`
     <div class="kpi ${x.cls||''}">
@@ -287,6 +285,7 @@ const TABS = [
   {id:'decor',  label:'装饰品'},
   {id:'sponsor',label:'赞助商'},
   {id:'gear',   label:'现场设备与耗材'},
+  {id:'remind', label:'现场提醒'},
   {id:'money',  label:'财务'}
 ];
 $('#tabs').innerHTML = TABS.map((t,i)=>`<button data-t="${t.id}" class="${i===0?'on':''}">${t.label}</button>`).join('');
@@ -360,25 +359,24 @@ function panelSponsor(){
     <div class="sponsors">${cards}</div></section>`;
 }
 function panelGear(){
-  const badge = st => st==='confirmed'?'<span class="badge ok">已备</span>'
-    : st==='gap'?'<span class="badge gap">缺口</span>'
-    : st==='todo'?'<span class="badge pd">待采购</span>':'<span class="badge pd">待定</span>';
-  const eq = D.equipment.map(e=>`
-    <div class="row"><span class="r-item">${esc(e.item)}</span>
-      <span class="r-qty">${esc(e.qty)}</span>
-      <span class="r-by">提供：${esc(e.by||'—')}</span></div>`).join('');
-  const byStatus = list => list.sort((a,b)=>{
-    const rank = s => s.status==='confirmed'?0 : s.status==='todo'?1 : 2;
-    return rank(a)-rank(b);
-  });
-  const sp = byStatus(D.supplies.slice()).map(s=>`
-    <div class="row"><span class="r-item">${esc(s.item)}</span>
-      <span class="r-qty">${esc(s.qty)}</span>
-      <span class="r-by">${s.by?'提供：'+esc(s.by):(s.note?esc(s.note):'')}</span>
-      ${badge(s.status)}</div>`).join('');
-  return `<section class="panel" data-p="gear">
-    <h2 class="sec">现场设备</h2><div class="rows">${eq}</div>
-    <h2 class="sec">现场物资与耗材</h2><div class="rows">${sp}</div>
+  const groups = (D.gearGroups||[]).map(g=>{
+    const rows = g.items.map(e=>`
+      <div class="row"><span class="r-item">${esc(e.item)}</span>
+        <span class="r-qty">${esc(e.qty||'')}</span>
+        <span class="r-by">${e.by?'提供：'+esc(e.by):''}</span></div>`).join('');
+    return `<h2 class="sec">${esc(g.g)} · ${g.items.length} 项</h2><div class="rows">${rows}</div>`;
+  }).join('');
+  return `<section class="panel" data-p="gear">${groups}</section>`;
+}
+function panelRemind(){
+  const r = D.reminders||{};
+  const tips = (r.tips||[]).map(t=>`<div class="row"><span class="r-item" style="min-width:0">${esc(t)}</span></div>`).join('');
+  const sch = (r.schedule||[]).map(s=>`
+    <div class="row"><span class="r-item" style="min-width:0">${esc(s.time)}</span>
+      <span class="r-by">${esc(s.who)}</span></div>`).join('');
+  return `<section class="panel" data-p="remind">
+    <h2 class="sec">⚠️ 明日现场提醒</h2><div class="rows">${tips}</div>
+    <h2 class="sec">就餐时间表</h2><div class="rows">${sch}</div>
   </section>`;
 }
 function panelMoney(){
@@ -417,7 +415,7 @@ function panelMoney(){
   </section>`;
 }
 
-$('#panels').innerHTML = panelFood()+panelDecor()+panelSponsor()+panelGear()+panelMoney();
+$('#panels').innerHTML = panelFood()+panelDecor()+panelSponsor()+panelGear()+panelRemind()+panelMoney();
 
 // ---- lightbox ----
 function openLb(i){
