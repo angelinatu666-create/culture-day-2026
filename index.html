@@ -235,8 +235,8 @@
   <span class="cnt" id="lb-cnt"></span>
 </div>
 
-<script src="photos.js?v=20261021i"></script>
-<script src="data.js?v=20261021i"></script>
+<script src="photos.js?v=20261021j"></script>
+<script src="data.js?v=20261021j"></script>
 <script>
 const D = window.BOARD;
 const P = window.PHOTOS || {2026:[],2025:[]};
@@ -274,7 +274,9 @@ let curList = [];
 function thumbOf(path){
   const T = window.THUMBS || {};
   if(T[path]) return T[path];
-  return path.replace('assets/photos/','assets/photos/thumbs/').replace(/\//g,'-');
+  // assets/photos/2026/g01.jpg → assets/photos/thumbs/2026-g01.jpg
+  const m = path.match(/assets\/photos\/(\d{4})\/([^/]+)$/);
+  return m ? `assets/photos/thumbs/${m[1]}-${m[2]}` : path;
 }
 
 function renderYear(){
