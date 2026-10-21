@@ -240,7 +240,7 @@
   </div>
 </div>
 
-<script src="data.js?v=20261006f"></script>
+<script src="data.js?v=20261021a"></script>
 <script>
 const D = window.BOARD;
 const $ = s => document.querySelector(s);
@@ -260,15 +260,18 @@ $('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
   const decorCount = D.decor.length + D.decorNoPhoto.length;
   const gearCount = (D.gearGroups||[]).reduce((a,g)=>a+g.items.length,0);
   const f = D.finance;
+  const rate = f.rate!=null ? f.rate : 0.20;
   const line = x => (x.unit==null) ? null : x.unit*x.qty;
-  const spentSum = (f.spent||[]).reduce((a,b)=>a+(line(b)||0),0);
-  const remain = (f.budget!=null) ? f.budget : null;
+  const allSpent = [].concat(f.spent||[], f.spent2||[]);
+  const spentSum = allSpent.reduce((a,b)=>a+(line(b)||0),0);
+  const reimSGD = Math.round(allSpent.reduce((a,b)=>a+(line(b)||0),0)*rate*100)/100;
+  const remain = (f.budget!=null) ? Math.round((f.budget-reimSGD)*100)/100 : null;
 
   const k = [
     {k:'食物接龙', v: foodPeople, u:'人', d: confirmedFood+' 人已确认 / '+(foodPeople-confirmedFood)+' 人待补'},
     {k:'装饰品', v: decorCount, u:'项', d:'含 '+(D.decor.length)+' 项实拍图'},
     {k:'现场设备与耗材', cls:'gold', v: gearCount, u:'项', d:(D.gearGroups||[]).length+' 组（布置/棉花糖/餐桌）'},
-    {k:'剩余资金', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 '+f.currency+' '+f.budget+' · 已花 ¥'+spentSum)},
+    {k:'报销后剩余', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 S$'+f.budget+' · 已花 ¥'+Math.round(spentSum*100)/100+'（≈S$'+reimSGD+'）')},
     {k:'赞助商', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'+(sponsorsRej?' / '+sponsorsRej+' 家已拒':'')}
   ];
   $('#kpis').innerHTML = k.map(x=>`
@@ -381,37 +384,71 @@ function panelRemind(){
 }
 function panelMoney(){
   const f = D.finance;
+  const rate = f.rate!=null ? f.rate : 0.20;
+  const all = [].concat(f.spent||[], f.spent2||[]);
   const line = x => (x.unit==null) ? null : x.unit*x.qty;
-  const spentSum = (f.spent||[]).reduce((a,b)=>a+(line(b)||0),0);
-  const budget = f.budget;
-  const remain = budget!=null? budget : null;
-  const pct = budget? Math.min(100, Math.round(spentSum/budget*100)) : 0;
+  const cny = all.reduce((a,b)=>a+(line(b)||0),0);
+  const tbd = all.filter(x=>x.unit==null).length;
   const curTag = c => c==='SGD' ? '<span class="tagcur sgd">SGD</span>' : '<span class="tagcur cny">¥</span>';
-  const def = (f.spent||[]).map(x=>{
-    const amt = line(x);
-    const price = (x.unit==null) ? '<span class="tbd">单价待补</span>' : (x.unit+' × '+x.qty+' = <b>'+amt+'</b>');
-    return `<div class="row"><span class="r-item">${esc(x.item)}</span>
+  const m2 = n => Math.round(n*100)/100;
+  const n2 = n => (Math.round(n*100)/100).toFixed(2);
+
+  // 垫付人汇总
+  const people = {};
+  all.forEach(x=>{ const k = x.by||'未注明'; people[k]=(people[k]||0)+(line(x)||0); });
+  const names = Object.keys(people);
+  const reimSGD = names.reduce((a,k)=>a+m2(people[k]*rate),0);
+  const left = f.budget!=null ? m2(f.budget-reimSGD) : null;
+  const per = (left!=null && names.length) ? m2(left/names.length) : null;
+
+  const section = (title, arr, sub) => {
+    if(!arr||!arr.length) return '';
+    const rows = arr.map(x=>{
+      const amt = line(x);
+      const price = (x.unit==null) ? '<span class="tbd">单价待补</span>' : (x.unit+' × '+x.qty+' = <b>'+m2(amt)+'</b>');
+      return `<div class="row"><span class="r-item">${esc(x.item)}</span>
         <span class="r-qty">${price}</span>
-        <span class="r-by">${curTag(x.cur||'CNY')}</span></div>`;
-  }).join('');
-  const defTotal = `<div class="row tot"><span class="r-item">合计（人民币）</span>
-      <span class="r-qty"><b>¥${spentSum}</b></span>
-      <span class="r-by">${(f.spent||[]).filter(x=>x.unit==null).length? '含 '+((f.spent||[]).filter(x=>x.unit==null).length)+' 项待补价':''}</span></div>`;
-  const todoRows = '';
-  const readyRows = '';
+        <span class="r-by">${esc(x.by||'')} 垫付 ${curTag(x.cur||'CNY')}</span></div>`;
+    }).join('');
+    const sum = arr.reduce((a,b)=>a+(line(b)||0),0);
+    return `<h2 class="sec">${title}${sub?' · '+sub:''}</h2>
+      <div class="rows">${rows}
+      <div class="row tot"><span class="r-item">小计</span>
+        <span class="r-qty"><b>¥${n2(sum)}</b></span><span class="r-by">≈ S$${n2(sum*rate)}</span></div></div>`;
+  };
+
+  const reimRows = names.map(k=>`<div class="row"><span class="r-item">${esc(k)}</span>
+      <span class="r-qty">¥${n2(people[k])} × ${rate} = <b>S$${n2(m2(people[k]*rate))}</b></span>
+      <span class="r-by">报销</span></div>`).join('')
+    + `<div class="row tot"><span class="r-item">报销合计</span>
+      <span class="r-qty"><b>S$${n2(reimSGD)}</b></span><span class="r-by">¥${n2(cny)}</span></div>`;
+
+  const refundRows = names.map(k=>`<div class="row"><span class="r-item">${esc(k)}</span>
+      <span class="r-qty">报销 S$${n2(m2(people[k]*rate))} + 退回 <b>S$${n2(per)}</b></span>
+      <span class="r-by">实得 S$${n2(m2(m2(people[k]*rate)+per))}</span></div>`).join('')
+    + `<div class="row tot"><span class="r-item">合计支出</span>
+      <span class="r-qty"><b>S$${n2(reimSGD)}</b> + 退回 <b>S$${n2(m2(per*names.length))}</b></span>
+      <span class="r-by">= S$${n2(m2(reimSGD+per*names.length))}</span></div>`;
+
   return `<section class="panel" data-p="money">
     <h2 class="sec">财务总览</h2>
     <div class="fin-grid">
-      <div class="fin"><div class="k">募集总收入</div><div class="v">${budget==null?'—':'SGD '+budget}</div></div>
-      <div class="fin"><div class="k">已花支出（人民币）</div><div class="v">¥${spentSum}</div>
-        <div class="bar"><i style="width:${pct}%"></i></div></div>
-      <div class="fin big"><div class="k">募集余额（SGD）</div><div class="v">${remain==null?'—':'SGD '+remain}</div>
-        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">募集款未动用 · 上述支出由人民币另行支付</div></div>
+      <div class="fin"><div class="k">募集总收入</div><div class="v">${f.budget==null?'—':'SGD '+f.budget}</div>
+        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">${(f.donors||[]).map(d=>esc(d.name)+' S$'+esc(d.amount)).join(' · ')}</div></div>
+      <div class="fin"><div class="k">已花支出（人民币）</div><div class="v">¥${n2(cny)}</div>
+        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">${tbd?'含 '+tbd+' 项待补价':'共 '+all.length+' 项'} · 折合 S$${n2(m2(cny*rate))}</div></div>
+      <div class="fin big"><div class="k">报销后剩余（SGD）</div><div class="v">${left==null?'—':'S$'+n2(left)}</div>
+        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">${per==null?'':'报销 S$'+n2(reimSGD)+' 后，平均退回 '+names.length+' 人 · 每人 S$'+n2(per)}</div></div>
     </div>
-    <h2 class="sec">捐赠人（SGD）</h2>
-    <div class="rows">${(f.donors&&f.donors.length)?f.donors.map(d=>`<div class="row"><span class="r-item">${esc(d.name)}</span><span class="r-qty">SGD ${esc(d.amount)}</span><span class="r-by">捐赠</span></div>`).join(''):'<div class="empty">暂无捐赠记录</div>'}</div>
-    <h2 class="sec">支出明细（人民币）</h2>
-    <div class="rows">${(f.spent&&f.spent.length)?(def+defTotal):'<div class="empty">暂无支出记录</div>'}</div>
+
+    <h2 class="sec">报销结算 · 汇率 ¥1 = S$${rate}</h2>
+    <div class="rows">${reimRows}</div>
+
+    <h2 class="sec">募集款退回 · SGD ${f.budget} − 报销 S$${n2(reimSGD)} = S$${n2(left)}，平均 ${names.length} 人</h2>
+    <div class="rows">${refundRows}</div>
+
+    ${section('支出明细 · '+(f.group||'装饰采购'), f.spent)}
+    ${section('支出明细 · 餐具容器', f.spent2)}
   </section>`;
 }
 
