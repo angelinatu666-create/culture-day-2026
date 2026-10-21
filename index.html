@@ -41,8 +41,8 @@
 
   /* ---------- 封面 ---------- */
   .cover{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);
-    aspect-ratio:16/7;background:#2b2016;margin-bottom:26px}
-  .cover img{width:100%;height:100%;object-fit:cover;display:block;opacity:.62}
+    aspect-ratio:16/8;background:#2b2016;margin-bottom:26px}
+  .cover img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;display:block;opacity:.72}
   .cover .ov{position:absolute;inset:0;
     background:linear-gradient(to top, rgba(30,18,12,.88) 0%, rgba(30,18,12,.35) 48%, rgba(30,18,12,.12) 100%);
     display:flex;flex-direction:column;justify-content:flex-end;padding:34px 38px;color:#fff}
@@ -128,6 +128,8 @@
 
   /* ---------- 财务小结 ---------- */
   .fin{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .fnote{background:#fdf6e8;border-left:3px solid var(--accent-2);border-radius:6px;
+    padding:11px 15px;font-size:13px;color:#6b4a2a;line-height:1.7;margin-bottom:14px}
   .fcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 16px}
   .fcard .k{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.4px}
   .fcard .v{font-size:22px;font-weight:800;color:var(--ink);margin-top:5px;line-height:1.2}
@@ -208,18 +210,10 @@
   <div class="sec-t"><h2>经验回顾</h2><span>下次办活动时先看这一页</span></div>
   <div class="les" id="lessons"></div>
 
-  <div class="sec-t"><h2>好在哪 / 差在哪</h2></div>
-  <div class="two">
-    <div class="box hi"><h4>✓ 做得好的</h4><ul id="highs"></ul></div>
-    <div class="box lo"><h4>! 可以更好</h4><ul id="lows"></ul></div>
-  </div>
-
   <div class="sec-t"><h2>财务小结</h2><span>2026 · 已结清</span></div>
+  <div class="fnote" id="fnote"></div>
   <div class="fin" id="fin"></div>
   <div class="fpeople" id="fpeople"></div>
-
-  <div class="sec-t"><h2>下次待办</h2><span>这些结论直接照着做</span></div>
-  <div class="todo"><ol id="todo"></ol></div>
 
   <footer>
     <span id="ft-left">文化日 2026 · 中国展台 · 回顾与纪念</span>
@@ -235,8 +229,8 @@
   <span class="cnt" id="lb-cnt"></span>
 </div>
 
-<script src="photos.js?v=20261021j"></script>
-<script src="data.js?v=20261021j"></script>
+<script src="photos.js?v=20261021k"></script>
+<script src="data.js?v=20261021k"></script>
 <script>
 const D = window.BOARD;
 const P = window.PHOTOS || {2026:[],2025:[]};
@@ -249,10 +243,13 @@ $('#cv-title').textContent = D.meta.title;
 $('#cv-tag').textContent = D.meta.tagline || '';
 $('#cv-date').textContent = D.meta.date + ' · ' + D.meta.subtitle;
 
-/* 封面图：优先用 2026 的全景图 */
+/* 封面图：data.js 里指定，没指定就退回 2026 的全景图 */
 (function(){
-  const pool = P[2026] || [];
-  const pick = pool[3] || pool[10] || pool[0] || '';
+  let pick = D.meta.cover || '';
+  if(!pick){
+    const pool = P[2026] || [];
+    pick = pool[3] || pool[10] || pool[0] || '';
+  }
   if(pick){ $('#cover-img').src = pick; }
 })();
 
@@ -315,14 +312,11 @@ $('#lessons').innerHTML = (D.lessons||[]).map(g=>`
     ${g.tip?`<div class="tip"><b>经验：</b>${esc(g.tip)}</div>`:''}
   </div>`).join('');
 
-/* ---------- 亮点 ---------- */
-$('#highs').innerHTML = (D.highs||[]).map(t=>`<li>${esc(t)}</li>`).join('');
-$('#lows').innerHTML  = (D.lows||[]).map(t=>`<li>${esc(t)}</li>`).join('');
-
 /* ---------- 财务 ---------- */
 (function(){
   const f = D.finance || {};
   const s = f.summary || {};
+  if(f.note){ $('#fnote').textContent = f.note; } else { $('#fnote').style.display='none'; }
   const cards = [
     { k:'募集收入', v:'S$'+(f.budget||0), d:'韦又嘉 S$200 · Angelian S$200', cls:'' },
     { k:'实际支出', v:'S$'+(s.spentSGD||0), d:'含人民币 ¥'+(s.spentCNY||0)+' 折汇', cls:'' },
@@ -336,9 +330,6 @@ $('#lows').innerHTML  = (D.lows||[]).map(t=>`<li>${esc(t)}</li>`).join('');
     <div class="fp">${esc(p.name)} 报销 <b>S$${p.amount.toFixed(2)}</b>
       <small>（${esc(p.orig)} · ${p.cur}）</small></div>`).join('');
 })();
-
-/* ---------- 下次待办 ---------- */
-$('#todo').innerHTML = (D.nextTime||[]).map(t=>`<li>${esc(t)}</li>`).join('');
 
 /* ---------- 灯箱 ---------- */
 let lbIdx = 0;
