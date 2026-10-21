@@ -27,19 +27,13 @@ window.BOARD = {
     spent: [
       { item: "红色布条",     unit: 3,     qty: 4, cur: "SGD", by: "涂",   note: "3×4" },
       { item: "白色布",       unit: 5.5,   qty: 8, cur: "SGD", by: "涂",   note: "5.5×8" },
-      { item: "红色桌布",     unit: 49,    qty: 8, cur: "CNY", by: "晓芳", note: "8张" },
+      { item: "红色桌布",     unit: 49,    qty: 4, cur: "CNY", by: "晓芳", note: "4张" },
       { item: "背景布（估价）", unit: 50,  qty: 1, cur: "CNY", by: "晓芳" },
       { item: "红色折扇",     unit: 36.5,  qty: 2, cur: "CNY", by: "周周" },
       { item: "小拉旗",       unit: 57.8,  qty: 2, cur: "CNY", by: "周周" }
     ],
     spent2: [
-      { item: "盘子",         unit: 1,     qty: 2, cur: "SGD", by: "涂" },
-      { item: "大碗",         unit: 6,     qty: 1, cur: "SGD", by: "涂" },
-      { item: "托盘",         unit: 3,     qty: 3, cur: "SGD", by: "涂" },
-      { item: "一次性野餐盒", unit: 1.9,   qty: 10, cur: "SGD", by: "涂" },
-      { item: "勺子",         unit: 1.2,   qty: 4, cur: "SGD", by: "涂" },
-      { item: "竹夹",         unit: 1,     qty: 4, cur: "SGD", by: "涂" },
-      { item: "大餐勺",       unit: 5.6,   qty: 2, cur: "SGD", by: "涂" }
+      { item: "一次性野餐盒", unit: 1.9,   qty: 10, cur: "SGD", by: "涂" }
     ]
   },
 
