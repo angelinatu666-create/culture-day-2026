@@ -3,24 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文化日 2026 · 中国展台看板</title>
+<title>文化日 2026 · 中国展台 · 回顾与纪念</title>
 <style>
   :root{
-    --bg:#faf5ec;           /* 象牙米白底 */
-    --surface:#ffffff;      /* 白卡片 */
+    --bg:#faf5ec;
+    --surface:#ffffff;
     --surface-2:#fdf8f0;
-    --ink:#2b2016;          /* 深墨褐 */
+    --ink:#2b2016;
     --muted:#8a7a66;
-    --border:#e7d9c4;       /* 米金描边 */
+    --border:#e7d9c4;
     --line:#ecdcc4;
-    --card:#ffffff;
-    --txt:#3a2f22;
-    --accent:#c8102e;       /* 中国红 */
-    --accent-2:#b8860b;     /* 描金 */
+    --accent:#c8102e;
+    --accent-2:#b8860b;
     --gold:#c9a227;
     --ok:#2e7d32;
-    --warn:#b8860b;
-    --gap:#c8102e;
     --radius:14px;
     --shadow:0 8px 26px rgba(140,90,40,.14);
   }
@@ -30,468 +26,344 @@
     color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     -webkit-font-smoothing:antialiased;
-    line-height:1.55;
+    line-height:1.6;
     background-color:var(--bg);
-    /* 象牙底 + 淡红金回纹/云纹暗纹（纯 CSS，多层低透明渐变叠加） */
     background-image:
       radial-gradient(circle at 18% 12%, rgba(200,16,46,.05), transparent 42%),
       radial-gradient(circle at 84% 8%,  rgba(201,162,39,.07), transparent 40%),
       radial-gradient(circle at 92% 78%, rgba(200,16,46,.045), transparent 44%),
       radial-gradient(circle at 8% 92%,  rgba(201,162,39,.06), transparent 42%),
-      /* 细网格回纹 */
-      repeating-linear-gradient(45deg, rgba(200,16,46,.028) 0 1px, transparent 1px 22px),
-      repeating-linear-gradient(-45deg, rgba(184,134,11,.028) 0 1px, transparent 1px 22px);
+      repeating-linear-gradient(45deg, rgba(200,16,46,.024) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(-45deg, rgba(184,134,11,.024) 0 1px, transparent 1px 22px);
     background-attachment:fixed;
   }
-  .wrap{max-width:1240px;margin:0 auto;padding:28px 20px 80px}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 80px}
 
-  /* ---- header ---- */
-  header.top{
-    display:flex;align-items:flex-end;justify-content:space-between;
-    gap:16px;flex-wrap:wrap;margin-bottom:6px;
-    border-bottom:2px solid var(--accent);padding-bottom:18px;
-    position:relative;
-  }
-  header.top:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold);opacity:.55}
-  .title h1{margin:0;font-size:27px;letter-spacing:.5px;color:var(--accent);font-weight:800}
-  .title .sub{color:var(--muted);font-size:13px;margin-top:5px}
-  .title .sub b{color:var(--accent-2);font-weight:700}
-  .stamp{
-    font-size:12px;color:var(--accent);border:1.5px solid var(--accent);
-    padding:6px 14px;border-radius:999px;background:#fff;
-    white-space:nowrap;box-shadow:0 2px 8px rgba(200,16,46,.10);
-  }
+  /* ---------- 封面 ---------- */
+  .cover{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:16/7;background:#2b2016;margin-bottom:26px}
+  .cover img{width:100%;height:100%;object-fit:cover;display:block;opacity:.62}
+  .cover .ov{position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(30,18,12,.88) 0%, rgba(30,18,12,.35) 48%, rgba(30,18,12,.12) 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:34px 38px;color:#fff}
+  .cover .cn{font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:700;margin-bottom:10px}
+  .cover h1{margin:0;font-size:40px;line-height:1.18;font-weight:800;letter-spacing:1px}
+  .cover .tl{font-size:15px;color:#f0e3cd;margin-top:12px;max-width:660px}
+  .cover .dt{font-size:12.5px;color:#d9c6a8;margin-top:14px;letter-spacing:.5px}
+  .cover .seal{position:absolute;top:26px;right:30px;border:2px solid rgba(201,162,39,.8);
+    color:var(--gold);border-radius:8px;padding:8px 12px;font-size:12px;letter-spacing:2px;
+    font-weight:700;background:rgba(40,20,14,.35);backdrop-filter:blur(2px)}
 
-  /* ---- KPI row ---- */
-  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 8px}
-  .kpi{
-    background:linear-gradient(180deg,#fff,var(--surface-2));
-    border:1px solid var(--border);border-radius:var(--radius);
-    padding:16px 18px;position:relative;overflow:hidden;
-    box-shadow:var(--shadow);
-  }
-  .kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
-  .kpi.gold:before{background:linear-gradient(180deg,var(--gold),var(--accent))}
-  .kpi .k{font-size:12px;color:var(--muted);letter-spacing:.4px}
-  .kpi .v{font-size:27px;font-weight:800;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
-  .kpi .v small{font-size:13px;color:var(--muted);font-weight:500}
-  .kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
+  /* ---------- 数字条 ---------- */
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:34px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:16px 14px;text-align:center;box-shadow:0 2px 10px rgba(140,90,40,.06)}
+  .stat .v{font-size:25px;font-weight:800;color:var(--accent);line-height:1.15}
+  .stat .v small{font-size:13px;color:var(--accent-2);font-weight:700;margin-left:1px}
+  .stat .k{font-size:12.5px;color:var(--ink);font-weight:700;margin-top:3px}
+  .stat .d{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
 
-  /* ---- tabs ---- */
-  nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 18px;position:sticky;top:0;z-index:20;
-    background:linear-gradient(180deg,var(--bg) 72%,rgba(250,245,236,0));padding:10px 0 12px}
-  nav.tabs button{
-    background:#fff;color:var(--muted);border:1px solid var(--border);
-    padding:9px 16px;border-radius:999px;font-size:13.5px;cursor:pointer;
-    font-family:inherit;transition:.15s;
-  }
-  nav.tabs button:hover{color:var(--accent);border-color:var(--accent)}
-  nav.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;
-    box-shadow:0 4px 14px rgba(200,16,46,.28)}
+  .sec-t{display:flex;align-items:baseline;gap:12px;margin:44px 0 16px;
+    border-bottom:2px solid var(--accent);padding-bottom:9px}
+  .sec-t h2{margin:0;font-size:20px;color:var(--accent);font-weight:800;letter-spacing:.5px}
+  .sec-t span{font-size:12.5px;color:var(--muted)}
 
-  section.panel{display:none}
-  section.panel.on{display:block;animation:fade .25s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* ---------- 故事 ---------- */
+  .story{background:var(--surface);border:1px solid var(--border);border-left:5px solid var(--accent);
+    border-radius:var(--radius);padding:24px 28px;box-shadow:0 2px 10px rgba(140,90,40,.06)}
+  .story p{margin:0 0 14px;font-size:14.5px;line-height:1.85;color:var(--txt,#3a2f22)}
+  .story p:last-child{margin-bottom:0}
+  .story p:first-child::first-letter{font-size:34px;font-weight:800;color:var(--accent);float:left;
+    line-height:1;margin:4px 8px 0 0}
 
-  h2.sec{font-size:14px;color:var(--accent);font-weight:700;letter-spacing:1px;
-    margin:26px 0 12px;display:flex;align-items:center;gap:10px}
-  h2.sec:after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+  /* ---------- 照片 ---------- */
+  .yearbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .yearbar button{background:var(--surface);border:1.5px solid var(--border);color:var(--ink);
+    border-radius:999px;padding:8px 18px;font-size:13.5px;font-weight:700;cursor:pointer;
+    transition:.18s;font-family:inherit}
+  .yearbar button:hover{border-color:var(--gold)}
+  .yearbar button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .yearbar button .n{font-size:11.5px;opacity:.7;margin-left:6px;font-weight:600}
 
-  /* ---- food grid ---- */
-  .people{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
-  .person{
-    background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-    padding:15px 16px;transition:.15s;border-top:3px solid var(--accent);
-    box-shadow:0 3px 12px rgba(140,90,40,.07);
-  }
-  .person:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
-  .person .who{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:10px;color:var(--ink)}
-  .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
-  .dot.ok{background:var(--ok)} .dot.pd{background:var(--gold)}
-  .person ul{margin:0;padding:0;list-style:none}
-  .person li{font-size:13.5px;color:#4a3d2c;padding:3px 0 3px 14px;position:relative}
-  .person li:before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;
-    border-radius:50%;background:var(--accent);opacity:.75}
-  .person .note{margin-top:8px;font-size:12px;color:var(--accent)}
-  .person li.dup{color:#a10d26}
-  .tagdup{display:inline-block;margin-left:7px;font-size:10.5px;line-height:1;padding:2px 6px;
-    border-radius:999px;background:rgba(200,16,46,.12);color:var(--accent);border:1px solid rgba(200,16,46,.4);
-    vertical-align:middle;font-weight:700}
-  .tagcur{display:inline-block;font-size:10.5px;line-height:1;padding:2px 7px;border-radius:999px;font-weight:700}
-  .tagcur.cny{background:rgba(184,134,11,.14);color:#8a6408;border:1px solid rgba(184,134,11,.45)}
-  .tagcur.sgd{background:rgba(200,16,46,.10);color:var(--accent);border:1px solid rgba(200,16,46,.35)}
-  .tbd{color:var(--accent);font-size:12px}
-  .row.tot{border-top:2px solid rgba(200,16,46,.25);margin-top:4px;padding-top:9px}
-  .row.tot .r-item{font-weight:700;color:var(--accent)}
+  .yhead{margin:0 0 16px}
+  .yhead h3{margin:0;font-size:17px;color:var(--ink);font-weight:800}
+  .yhead p{margin:5px 0 0;font-size:13px;color:var(--muted)}
 
-  /* ---- food summary ---- */
-  .summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-  .sumcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
-    border-top:3px solid var(--gold);box-shadow:0 3px 12px rgba(140,90,40,.07)}
-  .sumcard .sc-head{font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:9px;
-    color:var(--accent)}
-  .sumcard .sc-n{font-size:11px;font-weight:700;color:#fff;background:var(--gold);
-    border-radius:999px;padding:1px 8px;line-height:1.6}
-  .sumcard ul{margin:0;padding-left:16px}
-  .sumcard li{font-size:13px;color:var(--txt);line-height:1.9}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
+  .grid figure{margin:0;position:relative;border-radius:10px;overflow:hidden;
+    aspect-ratio:1/1;background:#f0e7d8;cursor:zoom-in;box-shadow:0 2px 8px rgba(140,90,40,.09)}
+  .grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+  .grid figure:hover img{transform:scale(1.06)}
+  .grid figure .no{position:absolute;left:6px;top:5px;font-size:10.5px;font-weight:700;color:#fff;
+    background:rgba(45,20,16,.6);padding:1px 5px;border-radius:4px;opacity:0;transition:.2s}
+  .grid figure:hover .no{opacity:1}
 
-  /* ---- decor cards ---- */
-  .decor{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-  .card{
-    background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-    overflow:hidden;cursor:zoom-in;transition:.18s;display:flex;flex-direction:column;
-    box-shadow:0 3px 12px rgba(140,90,40,.07);
-  }
-  .card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow)}
-  .card .thumb{aspect-ratio:4/3;background:#f3ead9;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-  .card .meta{padding:12px 14px 14px}
-  .card .meta .nm{font-size:14.5px;font-weight:700;color:var(--ink)}
-  .card .meta .qt{font-size:13px;color:var(--accent-2);margin-top:3px;font-variant-numeric:tabular-nums;font-weight:600}
-  .card .meta .by{font-size:12px;color:var(--muted);margin-top:5px;display:flex;justify-content:space-between;gap:8px}
-  .card .meta .by .zoomlink{color:var(--accent)}
+  /* ---------- 经验卡 ---------- */
+  .les{columns:2;column-gap:16px}
+  .lcard{break-inside:avoid;-webkit-column-break-inside:avoid;margin-bottom:16px}
+  .lcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:0 2px 10px rgba(140,90,40,.06)}
+  .lcard .gh{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;
+    color:var(--accent);margin-bottom:12px;padding-bottom:9px;border-bottom:1px dashed var(--line)}
+  .lcard .gh i{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+  .lcard ul{margin:0 0 10px;padding-left:0;list-style:none}
+  .lcard li{position:relative;padding-left:22px;font-size:13px;line-height:1.7;margin-bottom:7px;color:#3a2f22}
+  .lcard li.g::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800;font-size:13px}
+  .lcard li.b::before{content:"!";position:absolute;left:2px;top:0;width:14px;height:14px;
+    background:#fbe9e7;color:#b3261e;border-radius:50%;font-size:11px;font-weight:800;
+    text-align:center;line-height:14px;margin-top:3px}
+  .lcard .tip{background:var(--surface-2);border-left:3px solid var(--gold);border-radius:6px;
+    padding:9px 12px;font-size:12.5px;color:#5a4a34;line-height:1.65;margin-top:10px}
+  .lcard .tip b{color:var(--accent-2)}
 
-  /* ---- simple rows (equipment/supplies/nophoto) ---- */
-  .rows{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
-    box-shadow:0 3px 12px rgba(140,90,40,.06)}
-  .row{display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
-  .row:nth-child(even){background:var(--surface-2)}
-  .row:last-child{border-bottom:none}
-  .row .r-item{font-weight:700;min-width:110px;color:var(--ink)}
-  .row .r-qty{color:var(--accent-2);font-variant-numeric:tabular-nums;min-width:120px;font-weight:600}
-  .row .r-by{color:var(--muted);font-size:13px;flex:1}
-  .badge{font-size:11.5px;padding:2px 9px;border-radius:999px;font-weight:700;white-space:nowrap}
-  .badge.ok{background:rgba(46,125,50,.12);color:var(--ok)}
-  .badge.pd{background:rgba(184,134,11,.14);color:#8a6408}
-  .badge.gap{background:rgba(200,16,46,.12);color:var(--accent)}
+  /* ---------- 亮点 ---------- */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:0 2px 10px rgba(140,90,40,.06)}
+  .box h4{margin:0 0 12px;font-size:14.5px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .box.hi h4{color:var(--ok)}
+  .box.lo h4{color:#b3261e}
+  .box ul{margin:0;padding-left:18px}
+  .box li{font-size:13px;line-height:1.75;margin-bottom:6px;color:#3a2f22}
 
-  /* ---- sponsors ---- */
-  .sponsors{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-  .sponsor{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;
-    border-left:4px solid var(--gold);box-shadow:0 3px 12px rgba(140,90,40,.07)}
-  .sponsor .s-nm{font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--ink)}
-  .sponsor .s-note{font-size:12.5px;color:var(--muted);margin-top:8px}
-  .sponsor.off{opacity:.72;border-left-color:var(--muted);background:#f7f2e9}
-  .sponsor.off .s-nm{text-decoration:line-through;text-decoration-color:var(--muted)}
+  /* ---------- 财务小结 ---------- */
+  .fin{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .fcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 16px}
+  .fcard .k{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.4px}
+  .fcard .v{font-size:22px;font-weight:800;color:var(--ink);margin-top:5px;line-height:1.2}
+  .fcard.gold .v{color:var(--accent)}
+  .fcard .d{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .fpeople{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .fp{background:var(--surface-2);border:1px solid var(--line);border-radius:9px;
+    padding:8px 14px;font-size:12.5px;color:#4a3d2c}
+  .fp b{color:var(--accent);font-weight:800}
+  .fp small{color:var(--muted);font-size:11px}
 
-  /* ---- finance ---- */
-  .fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
-  .fin{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px;
-    border-top:3px solid var(--accent);box-shadow:0 3px 12px rgba(140,90,40,.07)}
-  .fin .k{font-size:12.5px;color:var(--muted)}
-  .fin .v{font-size:30px;font-weight:800;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
-  .fin.big{border-top-color:var(--gold)}
-  .fin.big .v{font-size:36px;color:var(--accent)}
-  .bar{height:10px;border-radius:999px;background:#efe4cf;overflow:hidden;margin-top:14px;border:1px solid var(--border)}
-  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold))}
-  .empty{color:var(--muted);font-size:13.5px;border:1px dashed var(--border);border-radius:var(--radius);
-    padding:22px;text-align:center;background:#fff}
+  /* ---------- 下次待办 ---------- */
+  .todo{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:6px 22px;box-shadow:0 2px 10px rgba(140,90,40,.06)}
+  .todo ol{margin:0;padding:14px 0 14px 4px;list-style:none;counter-reset:t}
+  .todo li{counter-increment:t;position:relative;padding:9px 0 9px 38px;font-size:13.5px;
+    line-height:1.65;border-bottom:1px dashed var(--line);color:#3a2f22}
+  .todo li:last-child{border-bottom:none}
+  .todo li::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;top:9px;
+    font-size:12px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums}
 
-  /* ---- lightbox ---- */
-  #lb{position:fixed;inset:0;background:rgba(43,32,22,.88);backdrop-filter:blur(6px);
-    display:none;align-items:center;justify-content:center;z-index:100;padding:30px}
-  #lb.on{display:flex;animation:fade .2s}
-  #lb .box{max-width:min(880px,92vw);max-height:88vh;display:flex;flex-direction:column;
-    background:#fff;border:2px solid var(--gold);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-  #lb img{max-width:100%;max-height:66vh;object-fit:contain;background:#f3ead9;display:block}
-  #lb .cap{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-  #lb .cap .nm{font-size:17px;font-weight:700;color:var(--accent)}
-  #lb .cap .qt{font-size:14px;color:var(--accent-2);font-weight:600}
-  #lb .cap .by{font-size:13px;color:var(--muted)}
-  #lb .cap .nt{font-size:13px;color:#4a3d2c;width:100%;margin-top:4px}
-  #lb .x{position:absolute;top:22px;right:26px;font-size:30px;color:#fff;cursor:pointer;line-height:1;opacity:.8}
+  footer{margin-top:52px;padding-top:18px;border-top:2px solid var(--gold);
+    color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+  /* ---------- 灯箱 ---------- */
+  #lb{position:fixed;inset:0;background:rgba(20,12,8,.93);z-index:99;display:none;
+    align-items:center;justify-content:center;padding:40px}
+  #lb.on{display:flex}
+  #lb img{max-width:92vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  #lb .x{position:absolute;top:18px;right:26px;font-size:34px;color:#fff;cursor:pointer;
+    line-height:1;opacity:.75}
   #lb .x:hover{opacity:1}
+  #lb .nav{position:absolute;top:50%;transform:translateY(-50%);font-size:40px;color:#fff;
+    cursor:pointer;opacity:.5;user-select:none;padding:14px;line-height:1}
+  #lb .nav:hover{opacity:1}
+  #lb .prev{left:16px}
+  #lb .next{right:16px}
+  #lb .cnt{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    color:#d9c6a8;font-size:13px;letter-spacing:1px}
 
-  footer{margin-top:50px;padding-top:20px;border-top:2px solid var(--gold);
-    color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  code{background:#f3ead9;padding:1px 6px;border-radius:5px;font-size:12px;color:var(--accent)}
+  @media(max-width:900px){
+    .stats{grid-template-columns:repeat(3,1fr)}
+    .les{columns:1}
+    .two{grid-template-columns:1fr}
+    .fin{grid-template-columns:repeat(2,1fr)}
+    .cover h1{font-size:27px}
+    .cover{aspect-ratio:4/3}
+    .cover .ov{padding:22px}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+    .story{padding:18px 20px}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="top">
-    <div class="title">
-      <h1 id="m-title">文化日 2026 · 中国展台</h1>
-      <div class="sub" id="m-sub"></div>
+
+  <div class="cover">
+    <img id="cover-img" alt="文化日现场">
+    <div class="seal">2026 · 纪念</div>
+    <div class="ov">
+      <div class="cn">CULTURE DAY 2026</div>
+      <h1 id="cv-title"></h1>
+      <div class="tl" id="cv-tag"></div>
+      <div class="dt" id="cv-date"></div>
     </div>
-    <div class="stamp">最后更新 · <span id="stamp"></span></div>
-  </header>
+  </div>
 
-  <div class="kpis" id="kpis"></div>
+  <div class="stats" id="stats"></div>
 
-  <nav class="tabs" id="tabs"></nav>
-  <main id="panels"></main>
+  <div class="sec-t"><h2>那天</h2><span>从摆盘到收摊</span></div>
+  <div class="story" id="story"></div>
+
+  <div class="sec-t"><h2>照片</h2><span>按年份整理 · 点击放大</span></div>
+  <div class="yearbar" id="yearbar"></div>
+  <div class="yhead" id="yhead"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="sec-t"><h2>经验回顾</h2><span>下次办活动时先看这一页</span></div>
+  <div class="les" id="lessons"></div>
+
+  <div class="sec-t"><h2>好在哪 / 差在哪</h2></div>
+  <div class="two">
+    <div class="box hi"><h4>✓ 做得好的</h4><ul id="highs"></ul></div>
+    <div class="box lo"><h4>! 可以更好</h4><ul id="lows"></ul></div>
+  </div>
+
+  <div class="sec-t"><h2>财务小结</h2><span>2026 · 已结清</span></div>
+  <div class="fin" id="fin"></div>
+  <div class="fpeople" id="fpeople"></div>
+
+  <div class="sec-t"><h2>下次待办</h2><span>这些结论直接照着做</span></div>
+  <div class="todo"><ol id="todo"></ol></div>
 
   <footer>
-    <span>单文件看板 · 数据在 <code>data.js</code>，改完刷新即可</span>
-    <span>点击装饰卡片可放大查看 / 细节</span>
+    <span id="ft-left">文化日 2026 · 中国展台 · 回顾与纪念</span>
+    <span>照片按年份归档 · 点击可放大浏览</span>
   </footer>
 </div>
 
-<div id="lb"><span class="x" onclick="closeLb()">&times;</span>
-  <div class="box">
-    <img id="lb-img" alt="">
-    <div class="cap">
-      <span class="nm" id="lb-nm"></span>
-      <span class="qt" id="lb-qt"></span>
-      <span class="by" id="lb-by"></span>
-      <span class="nt" id="lb-nt"></span>
-    </div>
-  </div>
+<div id="lb">
+  <span class="x" onclick="closeLb()">&times;</span>
+  <span class="nav prev" onclick="stepLb(-1)">‹</span>
+  <img id="lb-img" alt="">
+  <span class="nav next" onclick="stepLb(1)">›</span>
+  <span class="cnt" id="lb-cnt"></span>
 </div>
 
-<script src="data.js?v=20261021d"></script>
+<script src="photos.js?v=20261021i"></script>
+<script src="data.js?v=20261021i"></script>
 <script>
 const D = window.BOARD;
+const P = window.PHOTOS || {2026:[],2025:[]};
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-// header
-$('#m-title').textContent = D.meta.title;
-$('#m-sub').innerHTML = D.meta.subtitle + ' · <b>' + esc(D.meta.date) + '</b> · 负责人：' + esc(D.meta.owner);
-$('#stamp').textContent = new Date().toLocaleDateString('zh-CN');
+/* ---------- 封面 ---------- */
+document.title = D.meta.title + ' · ' + D.meta.subtitle;
+$('#cv-title').textContent = D.meta.title;
+$('#cv-tag').textContent = D.meta.tagline || '';
+$('#cv-date').textContent = D.meta.date + ' · ' + D.meta.subtitle;
 
-// ---- KPIs ----
+/* 封面图：优先用 2026 的全景图 */
 (function(){
-  const foodPeople = D.food.length;
-  const confirmedFood = D.food.filter(f=>f.status==='confirmed').length;
-  const sponsorsOk = D.sponsors.filter(s=>s.status==='confirmed').length;
-  const sponsorsRej = D.sponsors.filter(s=>s.status==='rejected').length;
-  const decorCount = D.decor.length + D.decorNoPhoto.length;
-  const gearCount = (D.gearGroups||[]).reduce((a,g)=>a+g.items.length,0);
-  const f = D.finance;
-  const rate = f.rate!=null ? f.rate : 5.24;
-  const line = x => (x.unit==null) ? null : x.unit*x.qty;
-  const allSpent = [].concat(f.spent||[], f.spent2||[]);
-  const toSGD = x => (x.cur==='SGD') ? (line(x)||0) : (line(x)||0)/rate;
-  const spentSGD = Math.round(allSpent.reduce((a,b)=>a+toSGD(b),0)*100)/100;
-  const reimSGD = spentSGD;
-  const remain = (f.budget!=null) ? Math.round((f.budget-reimSGD)*100)/100 : null;
-
-  const k = [
-    {k:'食物接龙', v: foodPeople, u:'人', d: confirmedFood+' 人已确认 / '+(foodPeople-confirmedFood)+' 人待补'},
-    {k:'装饰品', v: decorCount, u:'项', d:'含 '+(D.decor.length)+' 项实拍图'},
-    {k:'现场设备与耗材', cls:'gold', v: gearCount, u:'项', d:(D.gearGroups||[]).length+' 组（布置/棉花糖/餐桌）'},
-    {k:'报销后剩余', cls:'gold', v: remain==null?'—':(f.currency+' '+remain), u:'', d: remain==null?'未填收入':('募入 S$'+f.budget+' · 已花 S$'+spentSGD)},
-    {k:'赞助商', v: D.sponsors.length, u:'家', d: sponsorsOk+' 家已确认'+(sponsorsRej?' / '+sponsorsRej+' 家已拒':'')}
-  ];
-  $('#kpis').innerHTML = k.map(x=>`
-    <div class="kpi ${x.cls||''}">
-      <div class="k">${esc(x.k)}</div>
-      <div class="v">${esc(x.v)}<small> ${esc(x.u)}</small></div>
-      <div class="d">${esc(x.d)}</div>
-    </div>`).join('');
+  const pool = P[2026] || [];
+  const pick = pool[3] || pool[10] || pool[0] || '';
+  if(pick){ $('#cover-img').src = pick; }
 })();
 
-// ---- Tabs ----
-const TABS = [
-  {id:'food',   label:'食物接龙'},
-  {id:'decor',  label:'装饰品'},
-  {id:'sponsor',label:'赞助商'},
-  {id:'gear',   label:'现场设备与耗材'},
-  {id:'remind', label:'现场提醒'},
-  {id:'money',  label:'财务'}
-];
-$('#tabs').innerHTML = TABS.map((t,i)=>`<button data-t="${t.id}" class="${i===0?'on':''}">${t.label}</button>`).join('');
-$('#tabs').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
-  document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on', x===b));
-  document.querySelectorAll('section.panel').forEach(p=>p.classList.toggle('on', p.dataset.p===b.dataset.t));
-});
+/* ---------- 数字条 ---------- */
+$('#stats').innerHTML = (D.recap.stats||[]).map(s=>`
+  <div class="stat">
+    <div class="v">${esc(s.v)}<small>${esc(s.u||'')}</small></div>
+    <div class="k">${esc(s.k)}</div>
+    <div class="d">${esc(s.d||'')}</div>
+  </div>`).join('');
 
-// ---- Panels ----
-function panelFood(){
-  const cards = D.food.map(p=>{
-    const ok = p.status==='confirmed';
-    return `<div class="person">
-      <div class="who"><span class="dot ${ok?'ok':'pd'}"></span>${esc(p.name)}
-        <span class="badge ${ok?'ok':'pd'}" style="margin-left:auto">${ok?'已确认':'待补充'}</span></div>
-      <ul>${p.items.map(i=>{
-        const dup = (p.dups||[]).includes(i);
-        return `<li${dup?' class="dup"':''}>${esc(i)}${dup?'<span class="tagdup">重复</span>':''}</li>`;
-      }).join('')}</ul>
-      ${p.note?`<div class="note">待办：${esc(p.note)}</div>`:''}
-    </div>`;
-  }).join('');
-  const sumCards = (D.foodSummary||[]).map(g=>`
-    <div class="sumcard">
-      <div class="sc-head">${esc(g.cat)}<span class="sc-n">${g.items.length}</span></div>
-      <ul>${g.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>
-    </div>`).join('');
-  return `<section class="panel on" data-p="food">
-    <h2 class="sec">食物接龙 · ${D.food.length} 人</h2>
-    <div class="people">${cards}</div>
-    <h2 class="sec">菜品归类汇总</h2>
-    <div class="summary">${sumCards}</div>
-  </section>`;
-}
-function panelDecor(){
-  const cards = D.decor.map((d,i)=>`
-    <div class="card" onclick="openLb(${i})">
-      <div class="thumb"><img loading="lazy" src="${esc(d.photo)}" alt="${esc(d.item)}"></div>
-      <div class="meta">
-        <div class="nm">${esc(d.item)}</div>
-        <div class="qt">${esc(d.qty)}</div>
-        <div class="by"><span>提供：${esc(d.by||'—')}</span><span class="zoomlink">放大 ⤢</span></div>
-      </div>
-    </div>`).join('');
-  const rows = D.decorNoPhoto.map(d=>`
-    <div class="row"><span class="r-item">${esc(d.item)}</span>
-      <span class="r-qty">${esc(d.qty)}</span>
-      <span class="r-by">${esc(d.by||'')}</span></div>`).join('');
-  return `<section class="panel" data-p="decor">
-    <h2 class="sec">装饰品 · 实拍 ${D.decor.length} 项（点击放大）</h2>
-    <div class="decor">${cards}</div>
-    <h2 class="sec">装饰品 · 无图清单</h2>
-    <div class="rows">${rows}</div>
-  </section>`;
-}
-function panelSponsor(){
-  const stBadge = st => st==='confirmed'?'<span class="badge ok">已确认</span>'
-    : st==='rejected'?'<span class="badge gap">已拒绝</span>'
-    : '<span class="badge pd">待确认</span>';
-  const cards = D.sponsors.map(s=>`
-    <div class="sponsor${s.status==='rejected'?' off':''}">
-      <div class="s-nm">${esc(s.name)}
-        ${stBadge(s.status)}</div>
-      <div class="s-note">${esc(s.note||'')}</div>
-    </div>`).join('');
-  const okN = D.sponsors.filter(s=>s.status==='confirmed').length;
-  const rejN = D.sponsors.filter(s=>s.status==='rejected').length;
-  return `<section class="panel" data-p="sponsor">
-    <h2 class="sec">赞助商 · ${D.sponsors.length} 家（已确认 ${okN} · 已拒绝 ${rejN}）</h2>
-    <div class="sponsors">${cards}</div></section>`;
-}
-function panelGear(){
-  const groups = (D.gearGroups||[]).map(g=>{
-    const rows = g.items.map(e=>`
-      <div class="row"><span class="r-item">${esc(e.item)}</span>
-        <span class="r-qty">${esc(e.qty||'')}</span>
-        <span class="r-by">${e.by?'提供：'+esc(e.by):''}</span></div>`).join('');
-    return `<h2 class="sec">${esc(g.g)} · ${g.items.length} 项</h2><div class="rows">${rows}</div>`;
-  }).join('');
-  return `<section class="panel" data-p="gear">${groups}</section>`;
-}
-function panelRemind(){
-  const r = D.reminders||{};
-  const tips = (r.tips||[]).map(t=>`<div class="row"><span class="r-item" style="min-width:0">${esc(t)}</span></div>`).join('');
-  const sch = (r.schedule||[]).map(s=>`
-    <div class="row"><span class="r-item" style="min-width:0">${esc(s.time)}</span>
-      <span class="r-by">${esc(s.who)}</span></div>`).join('');
-  return `<section class="panel" data-p="remind">
-    <h2 class="sec">⚠️ 明日现场提醒</h2><div class="rows">${tips}</div>
-    <h2 class="sec">就餐时间表</h2><div class="rows">${sch}</div>
-  </section>`;
-}
-function panelMoney(){
-  const f = D.finance;
-  const rate = f.rate!=null ? f.rate : 5.24;          // 1 SGD = rate CNY
-  const all = [].concat(f.spent||[], f.spent2||[]);
-  const line = x => (x.unit==null) ? null : x.unit*x.qty;
-  const m2 = n => Math.round(n*100)/100;
-  const n2 = n => (Math.round(n*100)/100).toFixed(2);
-  const toSGD = x => (x.cur==='SGD') ? (line(x)||0) : (line(x)||0)/rate;
-  const cnyTotal = all.filter(x=>x.cur!=='SGD').reduce((a,b)=>a+(line(b)||0),0);
-  const sgdTotal = all.reduce((a,b)=>a+toSGD(b),0);
-  const tbd = all.filter(x=>x.unit==null).length;
-  const curTag = c => c==='SGD' ? '<span class="tagcur sgd">S$</span>' : '<span class="tagcur cny">¥</span>';
+/* ---------- 故事 ---------- */
+$('#story').innerHTML = (D.recap.story||[]).map(p=>`<p>${esc(p)}</p>`).join('');
 
-  // 垫付人汇总（各自币种原额 + 折新币）
-  const people = {};
-  all.forEach(x=>{
-    const k = x.by||'未注明';
-    people[k] = people[k] || {SGD:0, CNY:0, sgd:0};
-    if(x.cur==='SGD') people[k].SGD += (line(x)||0); else people[k].CNY += (line(x)||0);
-    people[k].sgd += toSGD(x);
+/* ---------- 照片 ---------- */
+let curYear = (D.photoYears[0]||{}).cur || '2026';
+let curList = [];
+
+function thumbOf(path){
+  const T = window.THUMBS || {};
+  if(T[path]) return T[path];
+  return path.replace('assets/photos/','assets/photos/thumbs/').replace(/\//g,'-');
+}
+
+function renderYear(){
+  const yrs = D.photoYears || [];
+  $('#yearbar').innerHTML = yrs.map(y=>{
+    const n = (P[y.cur]||[]).length;
+    return `<button data-y="${esc(y.cur)}" class="${y.cur===curYear?'on':''}">
+      ${esc(y.year)} 年<span class="n">${n} 张</span></button>`;
+  }).join('');
+  const meta = yrs.find(y=>y.cur===curYear) || {};
+  $('#yhead').innerHTML = `<h3>${esc(meta.title||'')}</h3><p>${esc(meta.caption||'')}</p>`;
+  curList = P[curYear] || [];
+  $('#grid').innerHTML = curList.map((p,i)=>`
+    <figure onclick="openLb(${i})">
+      <img loading="${i<12?'eager':'lazy'}" src="${esc(thumbOf(p))}" alt="">
+      <span class="no">${i+1}</span>
+    </figure>`).join('');
+  $('#grid').querySelectorAll('img').forEach(img=>{
+    img.onerror = ()=>{ img.style.opacity=.25; };
   });
-  const names = Object.keys(people);
-  names.forEach(k=>people[k].sgd = m2(people[k].sgd));
-  const reimSGD = m2(names.reduce((a,k)=>a+people[k].sgd,0));
-
-  const refundTo = (f.refundTo && f.refundTo.length) ? f.refundTo : names;
-  const left = f.budget!=null ? m2(f.budget-reimSGD) : null;
-  const per = (left!=null && refundTo.length) ? m2(left/refundTo.length) : null;
-
-  const section = (title, arr, sub) => {
-    if(!arr||!arr.length) return '';
-    const rows = arr.map(x=>{
-      const amt = line(x);
-      const isS = x.cur==='SGD';
-      const price = (x.unit==null) ? '<span class="tbd">单价待补</span>'
-        : (x.unit+' × '+x.qty+' = <b>'+(isS?'S$':'¥')+n2(amt)+'</b>');
-      const conv = isS ? '' : '<span style="color:var(--muted)"> ≈ S$'+n2(toSGD(x))+'</span>';
-      return `<div class="row"><span class="r-item">${esc(x.item)}</span>
-        <span class="r-qty">${price}${conv}</span>
-        <span class="r-by">${esc(x.by||'')} 垫付 ${curTag(x.cur||'CNY')}</span></div>`;
-    }).join('');
-    const sSum = arr.reduce((a,b)=>a+toSGD(b),0);
-    const cSum = arr.filter(x=>x.cur!=='SGD').reduce((a,b)=>a+(line(b)||0),0);
-    const sSumOwn = arr.filter(x=>x.cur==='SGD').reduce((a,b)=>a+(line(b)||0),0);
-    const mix = cSum>0 && sSumOwn>0
-      ? 'S$'+n2(sSumOwn)+' + ¥'+n2(cSum)
-      : (cSum>0 ? '¥'+n2(cSum)+' ÷ '+rate : '');
-    return `<h2 class="sec">${title}${sub?' · '+sub:''}</h2>
-      <div class="rows">${rows}
-      <div class="row tot"><span class="r-item">小计（折新币）</span>
-        <span class="r-qty"><b>S$${n2(m2(sSum))}</b></span><span class="r-by">${mix}</span></div></div>`;
-  };
-
-  const reimRows = names.map(k=>{
-    const p = people[k];
-    const src = [p.SGD?('S$'+n2(p.SGD)):'', p.CNY?('¥'+n2(p.CNY)):''].filter(Boolean).join(' + ');
-    return `<div class="row"><span class="r-item">${esc(k)}</span>
-      <span class="r-qty">${src} = <b>S$${n2(p.sgd)}</b>${p.CNY?'<span style="color:var(--muted)"> (÷'+rate+')</span>':''}</span>
-      <span class="r-by">报销</span></div>`;}).join('')
-    + `<div class="row tot"><span class="r-item">报销合计</span>
-      <span class="r-qty"><b>S$${n2(reimSGD)}</b></span><span class="r-by">${cnyTotal?'含 ¥'+n2(cnyTotal)+' 折汇':''}</span></div>`;
-
-  const reimMap = {}; names.forEach(k=>reimMap[k]=people[k].sgd);
-  const refundRows = refundTo.map(k=>{
-    const r = reimMap[k]||0;
-    return `<div class="row"><span class="r-item">${esc(k)}</span>
-      <span class="r-qty">${r?'报销 S$'+n2(r)+' + ':''}退回 <b>S$${n2(per)}</b></span>
-      <span class="r-by">实得 S$${n2(m2(r+per))}</span></div>`;}).join('')
-    + `<div class="row tot"><span class="r-item">合计</span>
-      <span class="r-qty">报销 <b>S$${n2(reimSGD)}</b> + 退回 <b>S$${n2(m2(per*refundTo.length))}</b></span>
-      <span class="r-by">= S$${n2(m2(reimSGD+per*refundTo.length))}</span></div>`;
-
-  return `<section class="panel" data-p="money">
-    <h2 class="sec">财务总览</h2>
-    <div class="fin-grid">
-      <div class="fin"><div class="k">募集总收入</div><div class="v">SGD ${f.budget}</div>
-        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">${(f.donors||[]).map(d=>esc(d.name)+' S$'+esc(d.amount)).join(' · ')}</div></div>
-      <div class="fin"><div class="k">已花支出（全部折新币）</div><div class="v">S$${n2(m2(sgdTotal))}</div>
-        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">${tbd?'含 '+tbd+' 项待补价':'共 '+all.length+' 项'}${cnyTotal?' · 其中人民币 ¥'+n2(cnyTotal):''}</div></div>
-      <div class="fin big"><div class="k">报销后剩余</div><div class="v">S$${n2(left)}</div>
-        <div class="d" style="font-size:12px;color:var(--muted);margin-top:6px">报销 S$${n2(reimSGD)} 后，平均退回 ${refundTo.length} 人（${refundTo.map(esc).join('、')}）· 每人 S$${n2(per)}</div></div>
-    </div>
-
-    <h2 class="sec">报销结算 · 1 SGD = ¥${rate}</h2>
-    <div class="rows">${reimRows}</div>
-
-    <h2 class="sec">募集款退回 · SGD ${f.budget} − 报销 S$${n2(reimSGD)} = S$${n2(left)}，平均 ${refundTo.length} 人</h2>
-    <div class="rows">${refundRows}</div>
-
-    ${section('支出明细 · '+(f.group||'装饰采购'), f.spent)}
-    ${section('支出明细 · 餐具容器', f.spent2)}
-  </section>`;
 }
+$('#yearbar').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  curYear = b.dataset.y; renderYear();
+});
+renderYear();
 
-$('#panels').innerHTML = panelFood()+panelDecor()+panelSponsor()+panelGear()+panelRemind()+panelMoney();
+/* ---------- 经验 ---------- */
+$('#lessons').innerHTML = (D.lessons||[]).map(g=>`
+  <div class="lcard">
+    <div class="gh"><i></i>${esc(g.g)}</div>
+    <ul>
+      ${(g.good||[]).map(t=>`<li class="g">${esc(t)}</li>`).join('')}
+      ${(g.bad||[]).map(t=>`<li class="b">${esc(t)}</li>`).join('')}
+    </ul>
+    ${g.tip?`<div class="tip"><b>经验：</b>${esc(g.tip)}</div>`:''}
+  </div>`).join('');
 
-// ---- lightbox ----
+/* ---------- 亮点 ---------- */
+$('#highs').innerHTML = (D.highs||[]).map(t=>`<li>${esc(t)}</li>`).join('');
+$('#lows').innerHTML  = (D.lows||[]).map(t=>`<li>${esc(t)}</li>`).join('');
+
+/* ---------- 财务 ---------- */
+(function(){
+  const f = D.finance || {};
+  const s = f.summary || {};
+  const cards = [
+    { k:'募集收入', v:'S$'+(f.budget||0), d:'韦又嘉 S$200 · Angelian S$200', cls:'' },
+    { k:'实际支出', v:'S$'+(s.spentSGD||0), d:'含人民币 ¥'+(s.spentCNY||0)+' 折汇', cls:'' },
+    { k:'结余退回', v:'S$'+(s.remainSGD||0), d:'平均退回 2 人', cls:'gold' },
+    { k:'每人退回', v:'S$'+(s.perPerson||0), d:'涂 / 韦又嘉', cls:'gold' }
+  ];
+  $('#fin').innerHTML = cards.map(c=>`
+    <div class="fcard ${c.cls}"><div class="k">${esc(c.k)}</div>
+      <div class="v">${esc(c.v)}</div><div class="d">${esc(c.d)}</div></div>`).join('');
+  $('#fpeople').innerHTML = (f.byPerson||[]).map(p=>`
+    <div class="fp">${esc(p.name)} 报销 <b>S$${p.amount.toFixed(2)}</b>
+      <small>（${esc(p.orig)} · ${p.cur}）</small></div>`).join('');
+})();
+
+/* ---------- 下次待办 ---------- */
+$('#todo').innerHTML = (D.nextTime||[]).map(t=>`<li>${esc(t)}</li>`).join('');
+
+/* ---------- 灯箱 ---------- */
+let lbIdx = 0;
 function openLb(i){
-  const d = D.decor[i];
-  $('#lb-img').src = d.photo;
-  $('#lb-nm').textContent = d.item;
-  $('#lb-qt').textContent = d.qty;
-  $('#lb-by').textContent = '提供：' + (d.by||'—');
-  $('#lb-nt').textContent = d.note || '';
+  if(!curList.length) return;
+  lbIdx = i;
+  $('#lb-img').src = curList[i];
+  $('#lb-cnt').textContent = (i+1) + ' / ' + curList.length;
   $('#lb').classList.add('on');
+  document.body.style.overflow = 'hidden';
 }
-function closeLb(){ $('#lb').classList.remove('on'); }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLb(); });
-$('#lb').addEventListener('click', e=>{ if(e.target.id==='lb') closeLb(); });
+function closeLb(){
+  $('#lb').classList.remove('on');
+  document.body.style.overflow = '';
+}
+function stepLb(d){
+  if(!curList.length) return;
+  lbIdx = (lbIdx + d + curList.length) % curList.length;
+  $('#lb-img').src = curList[lbIdx];
+  $('#lb-cnt').textContent = (lbIdx+1) + ' / ' + curList.length;
+}
+document.addEventListener('keydown', e=>{
+  if(!$('#lb').classList.contains('on')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowLeft') stepLb(-1);
+  if(e.key==='ArrowRight') stepLb(1);
+});
 </script>
 </body>
 </html>
