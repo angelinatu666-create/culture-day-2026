@@ -29,8 +29,10 @@ window.BOARD = {
       { item: "白色布",       unit: 5.5,   qty: 8, cur: "SGD", by: "涂",   note: "5.5×8" },
       { item: "红色桌布",     unit: 49,    qty: 4, cur: "CNY", by: "晓芳", note: "4张" },
       { item: "背景布（估价）", unit: 50,  qty: 1, cur: "CNY", by: "晓芳" },
+      { item: "邮费 + 税费",   unit: 93.13, qty: 1, cur: "CNY", by: "晓芳", note: "按周周同比例 1.3786 加成" },
       { item: "红色折扇",     unit: 36.5,  qty: 2, cur: "CNY", by: "周周" },
-      { item: "小拉旗",       unit: 57.8,  qty: 2, cur: "CNY", by: "周周" }
+      { item: "小拉旗",       unit: 57.8,  qty: 2, cur: "CNY", by: "周周" },
+      { item: "邮费 + 税费",   unit: 71.4,  qty: 1, cur: "CNY", by: "周周", note: "总额 260 − 货物 188.60" }
     ],
     spent2: [
       { item: "一次性野餐盒", unit: 1.9,   qty: 10, cur: "SGD", by: "涂" }
