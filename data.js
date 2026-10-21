@@ -14,30 +14,32 @@ window.BOARD = {
   finance: {
     currency: "SGD",       // 募集收入币种
     budget: 400,           // 募集总收入（SGD）
-    rate: 0.20,            // 人民币 → 新币 结算汇率：¥1 = S$0.20
+    rate: 5.24,            // 汇率：1 SGD = ¥5.24（人民币 ÷ 5.24 = 新币）
     donors: [              // 捐赠人（SGD）
       { name: "韦又嘉", amount: 200 },
       { name: "Angelian", amount: 200 }
     ],
     // 财务只记录已经发生的支出（待采购/物资见「现场设备与耗材」页）
-    // by  = 垫付人；refund = true 表示这笔要从募集款里报销给对方
+    // cur: 该笔实际付款币种；by: 垫付人 = 报销收款人
+    // 退款规则：募集款 − 报销合计，平均退给 refundTo 名单
+    refundTo: ["涂", "韦又嘉"],
     group: "装饰采购",
     spent: [
-      { item: "红色布条",     unit: 3,     qty: 4, cur: "CNY", by: "涂",  note: "3×4" },
-      { item: "白色布",       unit: 5.5,   qty: 8, cur: "CNY", by: "涂",  note: "5.5×8" },
+      { item: "红色布条",     unit: 3,     qty: 4, cur: "SGD", by: "涂",   note: "3×4" },
+      { item: "白色布",       unit: 5.5,   qty: 8, cur: "SGD", by: "涂",   note: "5.5×8" },
       { item: "红色桌布",     unit: 49,    qty: 8, cur: "CNY", by: "晓芳", note: "8张" },
       { item: "背景布（估价）", unit: 50,  qty: 1, cur: "CNY", by: "晓芳" },
       { item: "红色折扇",     unit: 36.5,  qty: 2, cur: "CNY", by: "周周" },
       { item: "小拉旗",       unit: 57.8,  qty: 2, cur: "CNY", by: "周周" }
     ],
     spent2: [
-      { item: "盘子",         unit: 1,     qty: 2, cur: "CNY", by: "涂" },
-      { item: "大碗",         unit: 6,     qty: 1, cur: "CNY", by: "涂" },
-      { item: "托盘",         unit: 3,     qty: 3, cur: "CNY", by: "涂" },
-      { item: "一次性野餐盒", unit: 1.9,   qty: 10, cur: "CNY", by: "涂" },
-      { item: "勺子",         unit: 1.2,   qty: 4, cur: "CNY", by: "涂" },
-      { item: "竹夹",         unit: 1,     qty: 4, cur: "CNY", by: "涂" },
-      { item: "大餐勺",       unit: 5.6,   qty: 2, cur: "CNY", by: "涂" }
+      { item: "盘子",         unit: 1,     qty: 2, cur: "SGD", by: "涂" },
+      { item: "大碗",         unit: 6,     qty: 1, cur: "SGD", by: "涂" },
+      { item: "托盘",         unit: 3,     qty: 3, cur: "SGD", by: "涂" },
+      { item: "一次性野餐盒", unit: 1.9,   qty: 10, cur: "SGD", by: "涂" },
+      { item: "勺子",         unit: 1.2,   qty: 4, cur: "SGD", by: "涂" },
+      { item: "竹夹",         unit: 1,     qty: 4, cur: "SGD", by: "涂" },
+      { item: "大餐勺",       unit: 5.6,   qty: 2, cur: "SGD", by: "涂" }
     ]
   },
 
